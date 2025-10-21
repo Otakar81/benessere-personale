@@ -88,6 +88,71 @@ function impostaPeriodoDefault() {
 
 document.getElementById("applyFilter").addEventListener("click", aggiornaDashboard);
 
+// === Toggle vista Riepilogo ===
+document.getElementById("toggleRiepilogo").addEventListener("click", (event) => {
+  const btn = event.target;
+  const current = btn.dataset.mode;
+  const next = current === "default" ? "settimana" :
+               current === "settimana" ? "confronto" : "default";
+  btn.dataset.mode = next;
+
+  // Aggiorna la dashboard mantenendo il filtro attuale
+  aggiornaRiepilogo(getDatiFiltrati(), next);
+});
+
+// === Toggle grafico Peso/BMI ↔ Composizione ===
+document.getElementById("togglePeso").addEventListener("click", () => {
+  const btn = event.target;
+  const current = btn.dataset.mode;
+  const next = current === "default" ? "composizione" : "default";
+  btn.dataset.mode = next;
+
+  aggiornaGraficoPeso(getDatiFiltrati(), next);
+
+  // Aggiorna titolo
+  const titolo = document.getElementById("titoloPeso");
+  titolo.textContent = (next === "default")
+    ? "📈 Andamento Peso / BMI"
+    : "🧍‍♂️ Composizione corporea (% Grasso / % Muscolo)";
+});
+
+// === Toggle grafico Kcal ===
+document.getElementById("toggleKcal").addEventListener("click", (event) => {
+  const btn = event.target;
+  const current = btn.dataset.mode;
+  const next = current === "default"
+    ? "distribuzione"
+    : current === "distribuzione"
+      ? "confronto"
+      : "default";
+
+  btn.dataset.mode = next;
+
+  aggiornaGraficoKcal(getDatiFiltrati(), next);
+
+  const titolo = document.getElementById("titoloKcal");
+  titolo.textContent =
+    next === "default"
+      ? "🔥 Kcal giornaliere"
+      : next === "distribuzione"
+        ? "🥧 Distribuzione Kcal per pasto (periodo selezionato)"
+        : "📆 Confronto Kcal per pasto (feriali vs weekend)";
+});
+
+
+
+function getDatiFiltrati() {
+  const start = new Date(document.getElementById("startDate").value);
+  const end = new Date(document.getElementById("endDate").value);
+
+  return datiTotali.filter(d => {
+    const [gg, mm, aaaa] = d.data.split("/");
+    const data = new Date(`${aaaa}-${mm}-${gg}`);
+    return data >= start && data <= end;
+  });
+}
+
+
 function aggiornaDashboard() {
   const start = new Date(document.getElementById("startDate").value);
   const end = new Date(document.getElementById("endDate").value);
@@ -112,134 +177,11 @@ function aggiornaGrafici(dati) {
   const kcal = dati.map(d => d.kcal);
   const passi = dati.map(d => d.passi);
 
-  // Peso/BMI
-  if (chartPeso) chartPeso.destroy();
-  
-  chartPeso = new Chart(document.getElementById("chartPeso"), {
-	  type: "line",
-	  data: {
-		labels,
-		datasets: [
-		  {
-			label: "Peso (kg)",
-			data: peso,
-			borderWidth: 2,
-			borderColor: "#2563eb",
-			yAxisID: "y",
-			spanGaps: true, // ✅ unisce i punti
-			tension: 0.3,   // ✅ curva più morbida
-		  },
-		  {
-			label: "BMI",
-			data: bmi,
-			borderWidth: 2,
-			borderColor: "#10b981",
-			yAxisID: "y1",
-			spanGaps: true,
-			tension: 0.3,
-		  }
-		]
-	  },
-	  options: {
-		responsive: true,
-		scales: {
-		  y: { beginAtZero: false },
-		  y1: { position: "right", beginAtZero: false }
-		}
-	  }
-	});
+  // Peso/BMI -> Toggle verso Composizione Corporea
+  aggiornaGraficoPeso(dati);
 
-  // Kcal/Passi
-  
   // === GRAFICO 1: Kcal ===
-  const fabbisognoMedio = 2200;
-  
-  if (chartKcal) chartKcal.destroy();
-
-  // Colori: blu per i giorni feriali, arancione per weekend
-  const backgroundColors = dati.map(d => {
-    const [gg, mm, aaaa] = d.data.split("/");
-    const day = new Date(`${aaaa}-${mm}-${gg}`).getDay(); // 0=Dom, 6=Sab
-    return (day === 0 || day === 6)
-      ? "rgba(249, 115, 22, 0.6)"  // weekend: arancione
-      : "rgba(37, 99, 235, 0.5)";  // feriali: blu
-  });
-
-  chartKcal = new Chart(document.getElementById("chartKcal"), {
-    type: "bar",
-    data: {
-      labels,
-      datasets: [
-        {
-          label: "Kcal giornaliere",
-          data: kcal,
-          backgroundColor: backgroundColors, // colori dinamici
-          borderColor: "#2563eb",
-          borderWidth: 1,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          title: { display: true, text: "Kcal" },
-        }
-      },
-      plugins: {
-        legend: { display: false },
-        annotation: {
-          annotations: {
-            fabbisogno: {
-              type: 'line',
-              yMin: fabbisognoMedio,
-              yMax: fabbisognoMedio,
-              borderColor: 'rgba(220,38,38,0.8)',
-              borderWidth: 2,
-              borderDash: [6, 6],
-              label: {
-                enabled: true,
-                content: `Fabbisogno medio ${fabbisognoMedio} kcal`,
-                position: 'end',
-                backgroundColor: 'rgba(220,38,38,0.1)',
-                color: '#dc2626',
-                font: { style: 'italic' }
-              }
-            }
-          }
-        }
-      }
-    }
-  });
-  
-    // Calcolo saldo calorico medio rispetto al fabbisogno
-	const mediaKcalPeriodo = kcal.filter(Boolean).reduce((a, b) => a + b, 0) / kcal.filter(Boolean).length;
-	const differenza = mediaKcalPeriodo - fabbisognoMedio;
-
-	const saldoEl = document.getElementById("saldoKcal");
-
-	if (!isNaN(differenza)) {
-	  let messaggio = "";
-	  let colore = "";
-
-	  if (Math.abs(differenza) < 50) {
-		messaggio = `⚖️ Bilanciato – apporto medio vicino al fabbisogno (${mediaKcalPeriodo.toFixed(0)} kcal)`;
-		colore = "text-blue-600";
-	  } else if (differenza < 0) {
-		messaggio = `📉 Deficit medio di ${(Math.abs(differenza)).toFixed(0)} kcal/giorno (${mediaKcalPeriodo.toFixed(0)} kcal)`;
-		colore = "text-green-600";
-	  } else {
-		messaggio = `📈 Surplus medio di ${differenza.toFixed(0)} kcal/giorno (${mediaKcalPeriodo.toFixed(0)} kcal)`;
-		colore = "text-red-600";
-	  }
-
-	  saldoEl.textContent = messaggio;
-	  saldoEl.className = `mt-3 text-center text-sm font-semibold ${colore}`;
-	} else {
-	  saldoEl.textContent = "–";
-	}
-
+  aggiornaGraficoKcal(dati);
 
   // === GRAFICO 2: Passi ===
   const passiMin = 8000;
@@ -366,9 +308,316 @@ function aggiornaGrafici(dati) {
 	  elPassi.textContent = "–";
 	}
 
+} // Fine aggiornaGrafici
 
-  
+function aggiornaGraficoPeso(dati, mode = "default") {
+  const labels = dati.map(d => d.data);
+  const ctx = document.getElementById("chartPeso");
+
+  if (chartPeso) chartPeso.destroy();
+
+  if (mode === "default") {
+    // Vista originale: Peso + BMI
+    chartPeso = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Peso (kg)",
+            data: dati.map(d => d.peso),
+            borderWidth: 2,
+            borderColor: "#2563eb",
+            yAxisID: "y",
+            spanGaps: true,
+            tension: 0.3,
+          },
+          {
+            label: "BMI",
+            data: dati.map(d => d.bmi),
+            borderWidth: 2,
+            borderColor: "#10b981",
+            yAxisID: "y1",
+            spanGaps: true,
+            tension: 0.3,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: "top" } },
+        scales: {
+          y: { title: { display: true, text: "Peso (kg)" } },
+          y1: { position: "right", title: { display: true, text: "BMI" } }
+        }
+      }
+    });
+  }
+
+  else if (mode === "composizione") {
+    // Vista alternativa: Massa muscolare + Grasso corporeo
+    const parsePercent = v => {
+      if (v == null || v === "") return null;
+      const num = parseFloat(v);
+      return isNaN(num) ? null : num * 100;
+    };
+
+    const muscolo = dati.map(d => parsePercent(d.muscolo));
+    const grasso = dati.map(d => parsePercent(d.grasso));
+
+    chartPeso = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "% Massa muscolare",
+            data: muscolo,
+            borderWidth: 2,
+            borderColor: "#3b82f6",
+            tension: 0.3,
+            spanGaps: true,
+          },
+          {
+            label: "% Grasso corporeo",
+            data: grasso,
+            borderWidth: 2,
+            borderColor: "#ef4444",
+            tension: 0.3,
+            spanGaps: true,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: "top" } },
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "%" } }
+        }
+      }
+    });
+  }
 }
+
+function aggiornaGraficoKcal(dati, mode = "default") {
+  const ctx = document.getElementById("chartKcal");
+  if (chartKcal) chartKcal.destroy();
+
+  // === VISTA 1: Default ===
+  if (mode === "default") {
+    const labels = dati.map(d => d.data);
+    const kcal = dati.map(d => d.kcal);
+    const fabbisognoMedio = 2200;
+
+    // Colori weekend
+    const backgroundColors = dati.map(d => {
+      const [gg, mm, aaaa] = d.data.split("/");
+      const day = new Date(`${aaaa}-${mm}-${gg}`).getDay();
+      return (day === 0 || day === 6)
+        ? "rgba(249, 115, 22, 0.6)"
+        : "rgba(37, 99, 235, 0.5)";
+    });
+
+    chartKcal = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "Kcal giornaliere",
+          data: kcal,
+          backgroundColor: backgroundColors,
+          borderColor: "#2563eb",
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "Kcal" } }
+        },
+        plugins: {
+          legend: { display: false },
+          annotation: {
+            annotations: {
+              fabbisogno: {
+                type: 'line',
+                yMin: fabbisognoMedio,
+                yMax: fabbisognoMedio,
+                borderColor: 'rgba(220,38,38,0.8)',
+                borderWidth: 2,
+                borderDash: [6, 6],
+                label: {
+                  enabled: true,
+                  content: `Fabbisogno medio ${fabbisognoMedio} kcal`,
+                  position: 'end',
+                  color: '#dc2626',
+                  backgroundColor: 'rgba(220,38,38,0.1)',
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Aggiorna saldo calorico sotto al grafico
+    const kcalValidi = kcal.filter(Boolean);
+    const mediaKcalPeriodo = kcalValidi.reduce((a,b)=>a+b,0) / kcalValidi.length;
+    const differenza = mediaKcalPeriodo - fabbisognoMedio;
+    const saldoEl = document.getElementById("saldoKcal");
+
+    if (!isNaN(differenza)) {
+      let messaggio, colore;
+      if (Math.abs(differenza) < 50) {
+        messaggio = `⚖️ Bilanciato – apporto medio vicino al fabbisogno (${mediaKcalPeriodo.toFixed(0)} kcal)`;
+        colore = "text-blue-600";
+      } else if (differenza < 0) {
+        messaggio = `📉 Deficit medio di ${Math.abs(differenza).toFixed(0)} kcal/giorno`;
+        colore = "text-green-600";
+      } else {
+        messaggio = `📈 Surplus medio di ${differenza.toFixed(0)} kcal/giorno`;
+        colore = "text-red-600";
+      }
+      saldoEl.textContent = messaggio;
+      saldoEl.className = `mt-3 text-center text-sm font-semibold ${colore}`;
+    } else {
+      saldoEl.textContent = "–";
+    }
+
+    return; // fine vista default
+  }
+
+  // === VISTA 2: Distribuzione per pasto (torta) ===
+  if (mode === "distribuzione") {
+    const pasti = [
+      { label: "Colazione", key: "kcalColazione", color: "#3b82f6" },
+      { label: "Snack Mattutino", key: "kcalSnackMattutino", color: "#a855f7" },
+      { label: "Pranzo", key: "kcalPranzo", color: "#10b981" },
+      { label: "Snack Pomeridiano", key: "kcalSnackPomeridiano", color: "#f59e0b" },
+      { label: "Cena", key: "kcalCena", color: "#f97316" },
+      { label: "Snack Serale", key: "kcalSnackSerale", color: "#ec4899" },
+    ];
+
+    const totali = pasti.map(p =>
+      dati.map(d => d[p.key] || 0).reduce((a, b) => a + b, 0)
+    );
+    const sommaTot = totali.reduce((a,b)=>a+b,0);
+    const labels = pasti.map(p => p.label);
+    const colors = pasti.map(p => p.color);
+
+    chartKcal = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels,
+        datasets: [{
+          data: totali,
+          backgroundColor: colors,
+          borderColor: "#fff",
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        responsive: true,
+        aspectRatio: 1.4,
+        cutout: "55%",
+        plugins: {
+          legend: { position: "bottom" },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const v = ctx.parsed;
+                const perc = ((v / sommaTot) * 100).toFixed(1);
+                return `${ctx.label}: ${v.toFixed(0)} kcal (${perc}%)`;
+              }
+            }
+          },
+          // ✅ ATTIVA DATI SEMPRE VISIBILI
+          datalabels: {
+            color: "#fff",
+            font: {
+              weight: "bold",
+              size: 12
+            },
+            formatter: (value, ctx) => {
+              const perc = (value / sommaTot) * 100;
+              return perc >= 4 ? `${perc.toFixed(0)}%` : ""; // mostra solo se >4%
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels] // ✅ registra il plugin
+    });
+
+
+    document.getElementById("saldoKcal").textContent =
+      "📊 Distribuzione totale kcal per pasto nel periodo selezionato";
+
+    return;
+  }
+
+  // === VISTA 3: Confronto feriali vs weekend ===
+  if (mode === "confronto") {
+    const pasti = [
+      { label: "Colazione", key: "kcalColazione", color: "#3b82f6" },
+      { label: "Snack Mattutino", key: "kcalSnackMattutino", color: "#a855f7" },
+      { label: "Pranzo", key: "kcalPranzo", color: "#10b981" },
+      { label: "Snack Pomeridiano", key: "kcalSnackPomeridiano", color: "#f59e0b" },
+      { label: "Cena", key: "kcalCena", color: "#f97316" },
+      { label: "Snack Serale", key: "kcalSnackSerale", color: "#ec4899" },
+    ];
+
+    // Divide dati tra feriali e weekend
+    const isWeekend = d => {
+      const [gg, mm, aaaa] = d.data.split("/");
+      const day = new Date(`${aaaa}-${mm}-${gg}`).getDay();
+      return day === 0 || day === 6;
+    };
+    const feriali = dati.filter(d => !isWeekend(d));
+    const weekend = dati.filter(d => isWeekend(d));
+
+    const media = arr => arr.filter(Boolean).reduce((a,b)=>a+b,0) / arr.filter(Boolean).length;
+
+    const kcalFeriali = pasti.map(p => media(feriali.map(d => d[p.key])));
+    const kcalWeekend = pasti.map(p => media(weekend.map(d => d[p.key])));
+
+    chartKcal = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: pasti.map(p => p.label),
+        datasets: [
+          {
+            label: "Feriali",
+            data: kcalFeriali,
+            backgroundColor: "rgba(37, 99, 235, 0.6)",
+          },
+          {
+            label: "Weekend",
+            data: kcalWeekend,
+            backgroundColor: "rgba(249, 115, 22, 0.6)",
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom" },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(0)} kcal`
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "Kcal medie per pasto" } }
+        }
+      }
+    });
+
+    document.getElementById("saldoKcal").textContent =
+      "📆 Confronto medio kcal per pasto: feriali vs weekend";
+  }
+}
+
 
 // === TABELLA ===
 function aggiornaTabella(dati) {
@@ -481,8 +730,9 @@ function aggiornaTabella(dati) {
 
 
 // === RIEPILOGO ===
-function aggiornaRiepilogo(dati) {
+function aggiornaRiepilogo(dati, mode = "default") {
   if (!dati.length) return;
+
   const media = arr => arr.filter(Boolean).reduce((a, b) => a + b, 0) / arr.filter(Boolean).length;
 
   const peso = media(dati.map(d => d.peso));
@@ -490,25 +740,109 @@ function aggiornaRiepilogo(dati) {
   const passi = media(dati.map(d => d.passi));
 
   const div = document.getElementById("summary");
-  div.innerHTML = `
-    <div class="bg-blue-50 rounded-lg p-3">
-      <p class="font-semibold">Peso medio</p>
-      <p>${peso ? peso.toFixed(1) + " kg" : "-"}</p>
-    </div>
-    <div class="bg-green-50 rounded-lg p-3">
-      <p class="font-semibold">Kcal medie</p>
-      <p>${kcal ? kcal.toFixed(0) : "-"}</p>
-    </div>
-    <div class="bg-orange-50 rounded-lg p-3">
-      <p class="font-semibold">Passi medi</p>
-      <p>${passi ? passi.toFixed(0) : "-"}</p>
-    </div>
-    <div class="bg-purple-50 rounded-lg p-3">
-      <p class="font-semibold">Giorni considerati</p>
-      <p>${dati.length}</p>
-    </div>
-  `;
+  div.className = "grid grid-cols-2 sm:grid-cols-4 gap-3 text-center";
+
+  if (mode === "default") {
+    div.innerHTML = `
+      <div class="bg-blue-50 rounded-lg p-3">
+        <p class="font-semibold">Peso medio</p>
+        <p>${peso ? peso.toFixed(1) + " kg" : "-"}</p>
+      </div>
+      <div class="bg-green-50 rounded-lg p-3">
+        <p class="font-semibold">Kcal medie</p>
+        <p>${kcal ? kcal.toFixed(0) : "-"}</p>
+      </div>
+      <div class="bg-orange-50 rounded-lg p-3">
+        <p class="font-semibold">Passi medi</p>
+        <p>${passi ? passi.toFixed(0) : "-"}</p>
+      </div>
+      <div class="bg-purple-50 rounded-lg p-3">
+        <p class="font-semibold">Giorni considerati</p>
+        <p>${dati.length}</p>
+      </div>
+      <div class="col-span-4 text-center text-sm text-gray-500 mt-2">
+        📊 Vista: Riepilogo periodo selezionato
+      </div>
+    `;
+  }
+
+  else if (mode === "settimana") {
+    // Media mobile 7 giorni (semplificata)
+    const media7d = arr => arr.map((_, i) => {
+      const start = Math.max(0, i - 6);
+      const sub = arr.slice(start, i + 1).filter(Boolean);
+      return sub.length ? sub.reduce((a,b)=>a+b,0)/sub.length : null;
+    });
+
+    const kcal7 = media7d(dati.map(d=>d.kcal));
+    const passi7 = media7d(dati.map(d=>d.passi));
+    const peso7 = media7d(dati.map(d=>d.peso));
+
+    div.innerHTML = `
+      <div class="bg-blue-50 rounded-lg p-3">
+        <p class="font-semibold">Peso (media mobile 7gg)</p>
+        <p>${peso7.at(-1)?.toFixed(1) || "-"}</p>
+      </div>
+      <div class="bg-green-50 rounded-lg p-3">
+        <p class="font-semibold">Kcal (media mobile 7gg)</p>
+        <p>${kcal7.at(-1)?.toFixed(0) || "-"}</p>
+      </div>
+      <div class="bg-orange-50 rounded-lg p-3">
+        <p class="font-semibold">Passi (media mobile 7gg)</p>
+        <p>${passi7.at(-1)?.toFixed(0) || "-"}</p>
+      </div>
+      <div class="bg-purple-50 rounded-lg p-3">
+        <p class="font-semibold">Ultima data</p>
+        <p>${dati.at(-1).data}</p>
+      </div>
+      <div class="col-span-4 text-center text-sm text-gray-500 mt-2">
+        📅 Vista: Settimana tipo (media mobile 7 giorni)
+      </div>
+    `;
+  }
+
+  else if (mode === "confronto") {
+    // Dividi il periodo in due metà e confronta
+    const metà = Math.floor(dati.length / 2);
+    const prima = dati.slice(0, metà);
+    const seconda = dati.slice(metà);
+
+    const delta = (arr1, arr2, key) => {
+      const m1 = media(arr1.map(d => d[key]));
+      const m2 = media(arr2.map(d => d[key]));
+      return ((m2 - m1) / m1) * 100;
+    };
+
+    const dPeso = delta(prima, seconda, "peso");
+    const dKcal = delta(prima, seconda, "kcal");
+    const dPassi = delta(prima, seconda, "passi");
+
+    const fmt = v => isNaN(v) ? "-" : (v >= 0 ? `📈 +${v.toFixed(1)}%` : `📉 ${v.toFixed(1)}%`);
+
+    div.innerHTML = `
+      <div class="bg-blue-50 rounded-lg p-3">
+        <p class="font-semibold">Δ Peso</p>
+        <p>${fmt(dPeso)}</p>
+      </div>
+      <div class="bg-green-50 rounded-lg p-3">
+        <p class="font-semibold">Δ Kcal</p>
+        <p>${fmt(dKcal)}</p>
+      </div>
+      <div class="bg-orange-50 rounded-lg p-3">
+        <p class="font-semibold">Δ Passi</p>
+        <p>${fmt(dPassi)}</p>
+      </div>
+      <div class="bg-purple-50 rounded-lg p-3">
+        <p class="font-semibold">Periodi</p>
+        <p>${prima.length} vs ${seconda.length} giorni</p>
+      </div>
+      <div class="col-span-4 text-center text-sm text-gray-500 mt-2">
+        🔁 Vista: Confronto con periodo precedente
+      </div>
+    `;
+  }
 }
+
 
 // === STATO PERSONALE CORRENTE ===
 function aggiornaStatoPersonale(dati) {
@@ -518,9 +852,20 @@ function aggiornaStatoPersonale(dati) {
   
   if (!dati || !dati.length) {
     statoEl.innerHTML = "";
-    suggerimentoEl.innerHTML = `<span class="text-gray-400 italic">Nessun dato disponibile</span>`;
-    return;
-  }
+
+    // Preserva gli a capo e spazi dal testo Excel
+    const suggerimentoFormattato = suggerimento
+      ? suggerimento
+          .replace(/\r\n|\r|\n/g, '<br>')   // converte \n in <br>
+          .replace(/\s{2,}/g, ' ')          // normalizza spazi multipli
+      : "";
+
+    suggerimentoEl.innerHTML = suggerimentoFormattato
+      ? `💡 <strong>Ultimo suggerimento:</strong><br>${suggerimentoFormattato}`
+      : `<span class="text-gray-400 italic">Nessun suggerimento recente disponibile</span>`;
+
+        return;
+      }
 
   // Trova l'ultima riga con un valore realmente valido (non null, non vuoto, non "-")
   const trovaUltimo = (campo) => {
