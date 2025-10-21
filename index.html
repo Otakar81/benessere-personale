@@ -13,11 +13,18 @@
   <!-- Registrazione service worker -->
   <script>
     if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('service-worker.js')
-		  .then(() => console.log("Service Worker registrato"))
-		  .catch(err => console.error("Errore SW:", err));
-	  }
-  </script>
+      navigator.serviceWorker.register('service-worker.js').then(reg => {
+        reg.addEventListener('updatefound', () => {
+          const newSW = reg.installing;
+          newSW.addEventListener('statechange', () => {
+            if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+              alert("È disponibile una nuova versione. Ricarica per aggiornare!");
+            }
+          });
+        });
+      });
+    }
+    </script>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
