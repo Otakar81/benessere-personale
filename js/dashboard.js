@@ -33,10 +33,10 @@ async function caricaDati() {
 		kcalRange: r.c[19]?.v || "-",               // Kcal Giornata (Range) (T)
 		kcal: cleanNumber(r.c[20]?.v),              // Kcal Giornata numerica (U)
 		passi: cleanNumber(r.c[21]?.v),             // Passi totali (V)
-		sonno: r.c[23]?.v || "",                    // Sonno (X)
-		sensazioni: r.c[24]?.v || "-",              // Sensazioni (Y)
-		valutazione: r.c[26]?.v || "-",             // Valutazione giornata (AA)
-		suggerimento: r.c[27]?.v || "-",             // Suggerimenti di miglioramento (AB)
+		sonno: r.c[24]?.v || "",                    // Sonno (X)
+		sensazioni: r.c[25]?.v || "-",              // Sensazioni (Y)
+		valutazione: r.c[27]?.v || "-",             // Valutazione giornata (AA)
+		suggerimento: r.c[28]?.v || "-",             // Suggerimenti di miglioramento (AB)
 
 		// kcal per pasto 👇
         kcalColazione: cleanNumber(r.c[8]?.v),
@@ -46,6 +46,9 @@ async function caricaDati() {
         kcalCena: cleanNumber(r.c[16]?.v),
         kcalSnackSerale: cleanNumber(r.c[18]?.v),
 
+        // Kcal consumate
+        kcalConsumate: cleanNumber(r.c[23]?.v),
+
 		// Box completo
 		colazione: r.c[7]?.v || "",                 // H
 		snackMattutino: r.c[9]?.v || "",            // J
@@ -54,7 +57,7 @@ async function caricaDati() {
 		cena: r.c[15]?.v || "",                     // P
 		snackSerale: r.c[17]?.v || "",              // R
 		attivita: r.c[22]?.v || "",                 // W (Attività fisica)
-		note: r.c[25]?.v || ""                      // Z (Note/Eventi)
+		note: r.c[26]?.v || ""                      // Z (Note/Eventi)
 	  };
 	}).filter(d => d.data);
 
@@ -70,7 +73,7 @@ async function caricaDati() {
     datiTotali[datiTotali.length - 1].data;
 
   impostaPeriodoDefault();
-}
+} // Fine caricaDati
 
 // === FILTRI DI DATA ===
 function impostaPeriodoDefault() {
@@ -96,7 +99,7 @@ document.getElementById("toggleRiepilogo").addEventListener("click", (event) => 
                current === "settimana" ? "confronto" : "default";
   btn.dataset.mode = next;
 
-  // Aggiorna la dashboard mantenendo il filtro attuale
+  // Aggiorna il box di riepilogo
   aggiornaRiepilogo(getDatiFiltrati(), next);
 });
 
@@ -107,6 +110,7 @@ document.getElementById("togglePeso").addEventListener("click", () => {
   const next = current === "default" ? "composizione" : "default";
   btn.dataset.mode = next;
 
+  // Aggiorna il grafico
   aggiornaGraficoPeso(getDatiFiltrati(), next);
 
   // Aggiorna titolo
@@ -128,8 +132,10 @@ document.getElementById("toggleKcal").addEventListener("click", (event) => {
 
   btn.dataset.mode = next;
 
+  // Aggiorna il grafico
   aggiornaGraficoKcal(getDatiFiltrati(), next);
 
+  // Aggiorna il titolo
   const titolo = document.getElementById("titoloKcal");
   titolo.textContent =
     next === "default"
@@ -140,7 +146,7 @@ document.getElementById("toggleKcal").addEventListener("click", (event) => {
 });
 
 
-
+// === Funzioni di supporto ===
 function getDatiFiltrati() {
   const start = new Date(document.getElementById("startDate").value);
   const end = new Date(document.getElementById("endDate").value);
@@ -177,13 +183,13 @@ function aggiornaGrafici(dati) {
   const kcal = dati.map(d => d.kcal);
   const passi = dati.map(d => d.passi);
 
-  // Peso/BMI -> Toggle verso Composizione Corporea
+  // === GRAFICO 1: PESO/BMI -> % Grasso e muscolo ===
   aggiornaGraficoPeso(dati);
 
-  // === GRAFICO 1: Kcal ===
+  // === GRAFICO 2: Kcal -> Distribuzione per pasto -> Confronto feriali vs weekend ===
   aggiornaGraficoKcal(dati);
 
-  // === GRAFICO 2: Passi ===
+  // === GRAFICO 3: Passi -> Attività fisica (da implementare) ===
   const passiMin = 8000;
   const passiMax = 10000;
   
