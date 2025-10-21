@@ -38,6 +38,14 @@ async function caricaDati() {
 		valutazione: r.c[26]?.v || "-",             // Valutazione giornata (AA)
 		suggerimento: r.c[27]?.v || "-",             // Suggerimenti di miglioramento (AB)
 
+		// kcal per pasto 👇
+        kcalColazione: cleanNumber(r.c[8]?.v),
+        kcalSnackMattutino: cleanNumber(r.c[10]?.v),
+        kcalPranzo: cleanNumber(r.c[12]?.v),
+        kcalSnackPomeridiano: cleanNumber(r.c[14]?.v),
+        kcalCena: cleanNumber(r.c[16]?.v),
+        kcalSnackSerale: cleanNumber(r.c[18]?.v),
+
 		// Box completo
 		colazione: r.c[7]?.v || "",                 // H
 		snackMattutino: r.c[9]?.v || "",            // J
@@ -148,6 +156,15 @@ function aggiornaGrafici(dati) {
   
   if (chartKcal) chartKcal.destroy();
 
+  // Colori: blu per i giorni feriali, arancione per weekend
+  const backgroundColors = dati.map(d => {
+    const [gg, mm, aaaa] = d.data.split("/");
+    const day = new Date(`${aaaa}-${mm}-${gg}`).getDay(); // 0=Dom, 6=Sab
+    return (day === 0 || day === 6)
+      ? "rgba(249, 115, 22, 0.6)"  // weekend: arancione
+      : "rgba(37, 99, 235, 0.5)";  // feriali: blu
+  });
+
   chartKcal = new Chart(document.getElementById("chartKcal"), {
     type: "bar",
     data: {
@@ -156,7 +173,7 @@ function aggiornaGrafici(dati) {
         {
           label: "Kcal giornaliere",
           data: kcal,
-          backgroundColor: "rgba(37, 99, 235, 0.5)",
+          backgroundColor: backgroundColors, // colori dinamici
           borderColor: "#2563eb",
           borderWidth: 1,
         }
@@ -385,6 +402,51 @@ function aggiornaTabella(dati) {
     // Riga dettaglio (inizialmente nascosta)
     const dettaglio = document.createElement("tr");
     dettaglio.classList.add("hidden", "bg-gray-50");
+
+    // Calcolo distribuzione Kcal per pasto
+    const pasti = [
+      { label: "Colazione", kcal: d.kcalColazione },
+      { label: "Snack Mattutino", kcal: d.kcalSnackMattutino },
+      { label: "Pranzo", kcal: d.kcalPranzo },
+      { label: "Snack Pomeridiano", kcal: d.kcalSnackPomeridiano },
+      { label: "Cena", kcal: d.kcalCena },
+      { label: "Snack Serale", kcal: d.kcalSnackSerale },
+    ];
+    const tot = pasti.reduce((s, p) => s + (p.kcal || 0), 0);
+
+    // Colori distinti per ogni pasto
+    const colors = ["#3b82f6", "#a855f7", "#10b981", "#f59e0b", "#f97316", "#ec4899"];
+
+    // Crea barra colorata
+    let barraDistribuzione = "";
+
+    if (tot > 0) {
+      const segmenti = pasti.map((p, i) => {
+        const perc = ((p.kcal || 0) / tot) * 100;
+        if (!perc) return "";
+        // Ogni sezione: barra + etichetta
+        return `
+          <div class="flex flex-col items-center" style="width:${perc}%;">
+            <div style="background:${colors[i]}; height:12px; width:100%; border-radius:2px;"></div>
+            <span class="text-[10px] text-gray-600 mt-1 whitespace-nowrap">
+              ${p.label.split(" ")[0]} ${Math.round(perc)}%
+            </span>
+          </div>
+        `;
+      }).join("");
+
+      barraDistribuzione = `
+        <div class="mt-4">
+          <p class="text-xs text-gray-600 text-center mt-2">Distribuzione kcal giornaliera</p>
+
+          <div class="flex justify-between items-end w-full text-center">
+            ${segmenti}
+          </div>
+        </div>
+      `;
+    }
+
+
     dettaglio.innerHTML = `
       <td colspan="6" class="p-4 text-sm text-gray-700 leading-relaxed">
         <div class="grid grid-cols-2 gap-x-6 gap-y-2">
@@ -397,8 +459,11 @@ function aggiornaTabella(dati) {
           <div class="col-span-2"><strong>🏃‍♂️ Attività fisica:</strong> ${d.attivita || "-"}</div>
           <div class="col-span-2"><strong>📝 Note / Eventi:</strong> ${d.note || "-"}</div>
         </div>
+
+        ${barraDistribuzione}
       </td>
     `;
+
 
     // Gestione click per apertura/chiusura
     const freccia = tr.querySelector("span:first-child");
