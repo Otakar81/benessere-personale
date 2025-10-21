@@ -32,6 +32,7 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 min-h-screen">
 
@@ -57,8 +58,16 @@
 	
 	<!-- Riepilogo periodo -->
     <section class="bg-white rounded-xl shadow p-4 mb-6">
-      <h2 class="text-xl font-semibold mb-2">📅 Riepilogo periodo selezionato</h2>
-      <div id="summary" class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center"></div>
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-xl font-semibold">📅 Riepilogo periodo selezionato</h2>
+        <button
+          id="toggleRiepilogo"
+          class="text-sm text-blue-600 hover:underline"
+          data-mode="default">
+          🔁 Cambia vista
+        </button>
+      </div>
+      <div id="summary"></div>
     </section>
 	
 	<!-- Stato personale -->
@@ -69,23 +78,34 @@
 		<!-- Popolato via JS -->
 	  </div>
 
-	  <div id="ultimoSuggerimento" class="bg-gray-50 border-t border-gray-200 rounded-lg p-3 text-sm text-gray-700 leading-relaxed">
+	  <div id="ultimoSuggerimento" class="bg-gray-50 border-t border-gray-200 rounded-lg p-3 text-sm text-gray-700 leading-relaxed whitespace-pre-line">
 		<!-- Popolato via JS -->
 	  </div>
+
 	</section>
 
     <!-- Grafico Peso/BMI -->
     <section class="bg-white rounded-xl shadow p-4 mb-6">
-      <h2 class="text-xl font-semibold mb-2">📈 Andamento Peso / BMI</h2>
+      <div class="flex justify-between items-center mb-2">
+        <h2 id="titoloPeso" class="text-xl font-semibold">📈 Andamento Peso / BMI</h2>
+        <button id="togglePeso" data-mode="default" class="text-sm text-blue-600 hover:underline">
+          🔁 Cambia vista
+        </button>
+      </div>
       <canvas id="chartPeso"></canvas>
     </section>
+
     
 	<!-- Grafico Kcal -->
 	<section class="bg-white rounded-xl shadow p-4 mb-6">
-	  <h2 class="text-xl font-semibold mb-2">🔥 Kcal giornaliere</h2>
-	  <canvas id="chartKcal"></canvas>
-	  
-	  <p id="saldoKcal" class="mt-3 text-center text-sm font-semibold text-gray-700"></p>
+	  <div class="flex justify-between items-center mb-2">
+          <h2 id="titoloKcal" class="text-xl font-semibold">🔥 Kcal giornaliere</h2>
+          <button id="toggleKcal" data-mode="default" class="text-sm text-blue-600 hover:underline">
+            🔁 Cambia vista
+          </button>
+      </div>
+      <canvas id="chartKcal"></canvas>
+      <p id="saldoKcal" class="mt-3 text-center text-sm font-semibold text-gray-700"></p>
 	</section>
 
 	<!-- Grafico Passi -->
