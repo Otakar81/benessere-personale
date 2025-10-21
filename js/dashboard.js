@@ -145,6 +145,22 @@ document.getElementById("toggleKcal").addEventListener("click", (event) => {
         : "📆 Confronto Kcal per pasto (feriali vs weekend)";
 });
 
+// === Toggle grafico Passi / Attività fisica ===
+document.getElementById("togglePassi").addEventListener("click", (event) => {
+  const btn = event.target;
+  const current = btn.dataset.mode;
+  const next = current === "default" ? "attivita" : "default";
+  btn.dataset.mode = next;
+
+  aggiornaGraficoPassi(getDatiFiltrati(), next);
+
+  const titolo = document.getElementById("titoloPassi");
+  titolo.textContent = (next === "default")
+    ? "🚶 Passi giornalieri"
+    : "🔥 Attività fisica (Kcal consumate)";
+});
+
+
 
 // === Funzioni di supporto ===
 function getDatiFiltrati() {
@@ -190,129 +206,7 @@ function aggiornaGrafici(dati) {
   aggiornaGraficoKcal(dati);
 
   // === GRAFICO 3: Passi -> Attività fisica (da implementare) ===
-  const passiMin = 8000;
-  const passiMax = 10000;
-  
-  if (chartPassi) chartPassi.destroy();
-
-	// Calcolo media mobile a 7 giorni
-	function mediaMobile(arr, finestra = 7) {
-	  return arr.map((_, i) => {
-		const start = Math.max(0, i - finestra + 1);
-		const subset = arr.slice(start, i + 1).filter(v => v != null);
-		if (!subset.length) return null;
-		const media = subset.reduce((a, b) => a + b, 0) / subset.length;
-		return Math.round(media);
-	  });
-	}
-
-	const passiMedia7 = mediaMobile(passi);
-
-	chartPassi = new Chart(document.getElementById("chartPassi"), {
-	  type: "bar",
-	  data: {
-		labels,
-		datasets: [
-		  {
-			label: "Passi giornalieri",
-			data: passi,
-			backgroundColor: "rgba(249, 115, 22, 0.5)",
-			borderColor: "#f97316",
-			borderWidth: 1,
-			yAxisID: "y",
-		  },
-		  {
-			label: "Media mobile (7gg)",
-			data: passiMedia7,
-			type: "line",
-			borderColor: "#3b82f6",
-			borderWidth: 2,
-			pointRadius: 0,
-			tension: 0.3,
-			yAxisID: "y",
-		  }
-		]
-	  },
-	  options: {
-		responsive: true,
-		scales: {
-		  y: {
-			beginAtZero: true,
-			title: { display: true, text: "Passi" },
-		  }
-		},
-		plugins: {
-		  legend: { display: true, position: "top" },
-		  annotation: {
-			annotations: {
-			  min: {
-				type: 'line',
-				yMin: passiMin,
-				yMax: passiMin,
-				borderColor: 'rgba(34,197,94,0.8)',
-				borderWidth: 1.5,
-				borderDash: [5, 5],
-				label: {
-				  enabled: true,
-				  content: `Min consigliato (${passiMin})`,
-				  position: 'start',
-				  color: '#16a34a',
-				  backgroundColor: 'rgba(34,197,94,0.1)'
-				}
-			  },
-			  max: {
-				type: 'line',
-				yMin: passiMax,
-				yMax: passiMax,
-				borderColor: 'rgba(34,197,94,0.8)',
-				borderWidth: 1.5,
-				borderDash: [5, 5],
-				label: {
-				  enabled: true,
-				  content: `Ottimale (${passiMax})`,
-				  position: 'end',
-				  color: '#16a34a',
-				  backgroundColor: 'rgba(34,197,94,0.1)'
-				}
-			  }
-			}
-		  }
-		}
-	  }
-	});
-	
-	// dopo aver calcolato passi e passiMedia7, e dopo aver creato chartPassi …
-
-	// messaggio sotto il grafico passi
-	const passiValidi = passi.filter(v => v != null);
-	const mediaPassi = passiValidi.length
-	  ? (passiValidi.reduce((a, b) => a + b, 0) / passiValidi.length)
-	  : null;
-
-	const minConsigliati = 8000;
-	const maxConsigliati = 10000;
-
-	const elPassi = document.getElementById("saldoPassi");
-	if (mediaPassi != null && !isNaN(mediaPassi)) {
-	  let mess = "";
-	  let colore = "";
-
-	  if (mediaPassi < minConsigliati) {
-		mess = `📉 Media passi: ${Math.round(mediaPassi)} — sotto il minimo consigliato (${minConsigliati})`;
-		colore = "text-orange-600";
-	  } else if (mediaPassi > maxConsigliati) {
-		mess = `📈 Media passi: ${Math.round(mediaPassi)} — sopra il massimo suggerito (${maxConsigliati})`;
-		colore = "text-green-600";
-	  } else {
-		mess = `✅ Media passi: ${Math.round(mediaPassi)} — nel range consigliato (${minConsigliati}-${maxConsigliati})`;
-		colore = "text-blue-600";
-	  }
-
-	  elPassi.textContent = mess;
-	  elPassi.className = `mt-3 text-center text-sm font-semibold ${colore}`;
-	} else {
-	  elPassi.textContent = "–";
-	}
+  aggiornaGraficoPassi(dati);
 
 } // Fine aggiornaGrafici
 
@@ -623,6 +517,105 @@ function aggiornaGraficoKcal(dati, mode = "default") {
       "📆 Confronto medio kcal per pasto: feriali vs weekend";
   }
 }
+
+
+function aggiornaGraficoPassi(dati, mode = "default") {
+  const ctx = document.getElementById("chartPassi");
+  if (chartPassi) chartPassi.destroy();
+
+  // === VISTA 1: Passi giornalieri (default) ===
+  if (mode === "default") {
+    const labels = dati.map(d => d.data);
+    const passi = dati.map(d => d.passi);
+    const backgroundColors = dati.map(d => {
+      const [gg, mm, aaaa] = d.data.split("/");
+      const day = new Date(`${aaaa}-${mm}-${gg}`).getDay();
+      return (day === 0 || day === 6)
+        ? "rgba(249, 115, 22, 0.6)" // weekend
+        : "rgba(37, 99, 235, 0.5)"; // feriali
+    });
+
+    chartPassi = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "Passi giornalieri",
+          data: passi,
+          backgroundColor: backgroundColors,
+          borderColor: "#2563eb",
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true, title: { display: true, text: "Numero di passi" } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    document.getElementById("riepilogoAttivita").textContent = "";
+    return;
+  }
+
+  // === VISTA 2: Attività fisica (Kcal consumate) ===
+  if (mode === "attivita") {
+    const labels = dati.map(d => d.data);
+    const kcal = dati.map(d => d.kcalConsumate || 0);
+
+    // Definizione soglie e colori
+    const backgroundColors = kcal.map(v => {
+      if (v >= 500) return "rgba(34,197,94,0.8)";   // verde - alta attività
+      if (v >= 250) return "rgba(234,179,8,0.8)";   // giallo - moderata
+      return "rgba(239,68,68,0.8)";                 // rosso - bassa
+    });
+
+    chartPassi = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "Kcal consumate",
+          data: kcal,
+          backgroundColor: backgroundColors,
+          borderColor: "#fff",
+          borderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: "Kcal consumate" }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.parsed.y.toFixed(0)} kcal`
+            }
+          }
+        }
+      }
+    });
+
+    // === Riepilogo sintetico ===
+    const media = kcal.filter(Boolean).reduce((a,b)=>a+b,0) / kcal.filter(Boolean).length;
+    let livello, colore, emoji;
+    if (media >= 500) { livello = "Alta attività"; colore = "text-green-600"; emoji = "💪"; }
+    else if (media >= 250) { livello = "Moderata"; colore = "text-yellow-600"; emoji = "🏃"; }
+    else { livello = "Bassa"; colore = "text-red-600"; emoji = "🛋"; }
+
+    document.getElementById("riepilogoAttivita").className = `mt-3 text-center text-sm font-semibold ${colore}`;
+    document.getElementById("riepilogoAttivita").textContent =
+      `${emoji} Media ${media.toFixed(0)} kcal/giorno — livello ${livello}`;
+  }
+}
+
 
 
 // === TABELLA ===
