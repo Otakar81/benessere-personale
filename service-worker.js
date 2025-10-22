@@ -3,7 +3,7 @@
 // Aggiornato per refresh immediato e cache controllata
 // ==========================
 
-const CACHE_NAME = "benessere-personale-cache-v4"; // cambiare questo valore a ogni rilascio
+const CACHE_NAME = "benessere-personale-cache-v5"; // cambiare questo valore a ogni rilascio
 const URLS_TO_CACHE = [
   "./",
   "index.html",

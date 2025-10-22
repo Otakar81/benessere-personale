@@ -60,14 +60,13 @@
     <section class="bg-white rounded-xl shadow p-4 mb-6">
       <div class="flex justify-between items-center mb-2">
         <h2 class="text-xl font-semibold">📅 Riepilogo periodo selezionato</h2>
-        <button
-          id="toggleRiepilogo"
-          class="text-sm text-blue-600 hover:underline"
-          data-mode="default">
-          🔁 Cambia vista
-        </button>
+        <button id="toggleRiepilogo" data-mode="default"
+            class="px-2 py-1 text-sm bg-blue-50 text-black-700 rounded-lg hover:bg-blue-100">
+            🔁 Cambia vista
+          </button>
       </div>
       <div id="summary"></div>
+      <div id="titoloSummary" class="col-span-4 text-center text-sm text-gray-500 mt-2"></div>
     </section>
 	
 	<!-- Stato personale -->
@@ -88,9 +87,17 @@
     <section class="bg-white rounded-xl shadow p-4 mb-6">
       <div class="flex justify-between items-center mb-2">
         <h2 id="titoloPeso" class="text-xl font-semibold">📈 Andamento Peso / BMI</h2>
-        <button id="togglePeso" data-mode="default" class="text-sm text-blue-600 hover:underline">
-          🔁 Cambia vista
-        </button>
+
+        <div class="flex items-center gap-2">
+          <button id="togglePeso" data-mode="default"
+            class="px-2 py-1 text-sm bg-blue-50 text-black-700 rounded-lg hover:bg-blue-100">
+            🔁 Cambia vista
+          </button>
+          <button class="fullscreenBtn px-2 py-1 text-sm bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100">
+            🖵
+          </button>
+        </div>
+
       </div>
       <canvas id="chartPeso"></canvas>
     </section>
@@ -100,9 +107,17 @@
 	<section class="bg-white rounded-xl shadow p-4 mb-6">
 	  <div class="flex justify-between items-center mb-2">
           <h2 id="titoloKcal" class="text-xl font-semibold">🔥 Kcal giornaliere</h2>
-          <button id="toggleKcal" data-mode="default" class="text-sm text-blue-600 hover:underline">
-            🔁 Cambia vista
-          </button>
+
+          <div class="flex items-center gap-2">
+              <button id="toggleKcal" data-mode="default"
+                class="px-2 py-1 text-sm bg-blue-50 text-black-700 rounded-lg hover:bg-blue-100">
+                🔁 Cambia vista
+              </button>
+              <button class="fullscreenBtn px-2 py-1 text-sm bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100">
+                🖵
+              </button>
+          </div>
+
       </div>
       <canvas id="chartKcal"></canvas>
       <p id="saldoKcal" class="mt-3 text-center text-sm font-semibold text-gray-700"></p>
@@ -112,36 +127,59 @@
 	<section class="bg-white rounded-xl shadow p-4 mb-6">
 	  <div class="flex justify-between items-center mb-2">
           <h2 id="titoloPassi" class="text-xl font-semibold">🚶 Passi giornalieri</h2>
-          <button id="togglePassi" data-mode="default" class="text-sm text-blue-600 hover:underline">
-            🔁 Cambia vista
-          </button>
+
+          <div class="flex items-center gap-2">
+              <button id="togglePassi" data-mode="default"
+                class="px-2 py-1 text-sm bg-blue-50 text-black-700 rounded-lg hover:bg-blue-100">
+                🔁 Cambia vista
+              </button>
+              <button class="fullscreenBtn px-2 py-1 text-sm bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100">
+                🖵
+              </button>
+          </div>
+
       </div>
       <canvas id="chartPassi"></canvas>
       <p id="riepilogoAttivita" class="mt-3 text-center text-sm font-semibold text-gray-700"></p>
 	</section>    
 
     <!-- Tabella giornaliera -->
-    <section class="bg-white rounded-xl shadow p-4">
-      <h2 class="text-xl font-semibold mb-3">📋 Dettaglio giornaliero</h2>
+    <section class="bg-white rounded-xl shadow p-4 mb-6">
+      <div class="flex justify-between items-center mb-2">
+        <h2 class="text-xl font-semibold">📋 Dettaglio giornaliero</h2>
+        <button class="fullscreenBtn px-2 py-1 text-sm bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100">
+          🖵 Fullscreen
+        </button>
+      </div>
+
       <div class="overflow-x-auto">
         <table class="min-w-full text-sm border-collapse" id="dailyTable">
           <thead class="bg-gray-100 font-semibold">
-			  <tr>
-				<th class="p-2 border">Data</th>
-				<th class="p-2 border">Kcal (Range)</th>
-				<th class="p-2 border">Passi</th>
-				<th class="p-2 border">Sonno</th>
-				<th class="p-2 border">Sensazioni</th>
-				<th class="p-2 border">Valutazione</th>
-			  </tr>
-		  </thead>
+            <tr>
+              <th class="p-2 border">Data</th>
+              <th class="p-2 border">Kcal (Range)</th>
+              <th class="p-2 border">Passi</th>
+              <th class="p-2 border">Sonno</th>
+              <th class="p-2 border">Sensazioni</th>
+              <th class="p-2 border">Valutazione</th>
+            </tr>
+          </thead>
           <tbody></tbody>
         </table>
       </div>
     </section>
+
+  </div>
+
+  <!-- Modal fullscreen -->
+  <div id="fullscreenModal" class="fixed inset-0 bg-white z-50 hidden p-4 overflow-auto">
+    <button id="closeFullscreen" class="absolute top-2 right-2 text-xl font-bold z-10">✖</button>
+    <div id="fullscreenContent" class="w-full h-full flex justify-center items-center"></div>
   </div>
 
   <!-- Script -->
   <script src="js/dashboard.js"></script>
+
 </body>
+
 </html>
