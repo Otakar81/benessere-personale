@@ -101,6 +101,7 @@ document.getElementById("toggleRiepilogo").addEventListener("click", (event) => 
 
   // Aggiorna il box di riepilogo
   aggiornaRiepilogo(getDatiFiltrati(), next);
+
 });
 
 // === Toggle grafico Peso/BMI ↔ Composizione ===
@@ -562,13 +563,19 @@ function aggiornaGraficoPassi(dati, mode = "default") {
 
   // === VISTA 2: Attività fisica (Kcal consumate) ===
   if (mode === "attivita") {
+
+    // Livelli di attività predefiniti, per il grafico
+    const livelloAlto = 500;
+    const livelloMedio = 250;
+
     const labels = dati.map(d => d.data);
     const kcal = dati.map(d => d.kcalConsumate || 0);
+    const kcalCumulative = kcal.map((v,i) => kcal.slice(0,i+1).reduce((a,b)=>a+b,0));
 
     // Definizione soglie e colori
     const backgroundColors = kcal.map(v => {
-      if (v >= 500) return "rgba(34,197,94,0.8)";   // verde - alta attività
-      if (v >= 250) return "rgba(234,179,8,0.8)";   // giallo - moderata
+      if (v >= livelloAlto) return "rgba(34,197,94,0.8)";   // verde - alta attività
+      if (v >= livelloMedio) return "rgba(234,179,8,0.8)";   // giallo - moderata
       return "rgba(239,68,68,0.8)";                 // rosso - bassa
     });
 
@@ -582,6 +589,16 @@ function aggiornaGraficoPassi(dati, mode = "default") {
           backgroundColor: backgroundColors,
           borderColor: "#fff",
           borderWidth: 1,
+        },
+        {
+          label: "Kcal cumulative",
+          data: kcalCumulative,
+          type: "line",
+          borderColor: "#2563eb",
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.3,
+          yAxisID: "y",
         }]
       },
       options: {
@@ -606,8 +623,8 @@ function aggiornaGraficoPassi(dati, mode = "default") {
     // === Riepilogo sintetico ===
     const media = kcal.filter(Boolean).reduce((a,b)=>a+b,0) / kcal.filter(Boolean).length;
     let livello, colore, emoji;
-    if (media >= 500) { livello = "Alta attività"; colore = "text-green-600"; emoji = "💪"; }
-    else if (media >= 250) { livello = "Moderata"; colore = "text-yellow-600"; emoji = "🏃"; }
+    if (media >= livelloAlto) { livello = "Alta attività"; colore = "text-green-600"; emoji = "💪"; }
+    else if (media >= livelloMedio) { livello = "Moderata"; colore = "text-yellow-600"; emoji = "🏃"; }
     else { livello = "Bassa"; colore = "text-red-600"; emoji = "🛋"; }
 
     document.getElementById("riepilogoAttivita").className = `mt-3 text-center text-sm font-semibold ${colore}`;
@@ -759,10 +776,11 @@ function aggiornaRiepilogo(dati, mode = "default") {
         <p class="font-semibold">Giorni considerati</p>
         <p>${dati.length}</p>
       </div>
-      <div class="col-span-4 text-center text-sm text-gray-500 mt-2">
-        📊 Vista: Riepilogo periodo selezionato
-      </div>
     `;
+
+    // Aggiorna il titolo
+    const titolo = document.getElementById("titoloSummary");
+    titolo.textContent = "📊 Vista: Riepilogo periodo selezionato"
   }
 
   else if (mode === "settimana") {
@@ -794,10 +812,11 @@ function aggiornaRiepilogo(dati, mode = "default") {
         <p class="font-semibold">Ultima data</p>
         <p>${dati.at(-1).data}</p>
       </div>
-      <div class="col-span-4 text-center text-sm text-gray-500 mt-2">
-        📅 Vista: Settimana tipo (media mobile 7 giorni)
-      </div>
     `;
+
+    // Aggiorna il titolo
+    const titolo = document.getElementById("titoloSummary");
+    titolo.textContent = "📅 Vista: Settimana tipo (media mobile 7 giorni)"
   }
 
   else if (mode === "confronto") {
@@ -835,10 +854,11 @@ function aggiornaRiepilogo(dati, mode = "default") {
         <p class="font-semibold">Periodi</p>
         <p>${prima.length} vs ${seconda.length} giorni</p>
       </div>
-      <div class="col-span-4 text-center text-sm text-gray-500 mt-2">
-        🔁 Vista: Confronto con periodo precedente
-      </div>
     `;
+
+    // Aggiorna il titolo
+    const titolo = document.getElementById("titoloSummary");
+    titolo.textContent = "🔁 Vista: Confronto con periodo precedente"
   }
 }
 
@@ -930,6 +950,150 @@ function aggiornaStatoPersonale(dati) {
     : `<span class="text-gray-400 italic">Nessun suggerimento recente disponibile</span>`;
 }
 
+
+// === GESTIONE MODAL FULL SCREEN ===
+
+// === Fullscreen universale (fix Recursion detected + supporto table/div) ===
+const fullscreenModal = document.getElementById("fullscreenModal");
+const fullscreenContent = document.getElementById("fullscreenContent");
+const closeFullscreen = document.getElementById("closeFullscreen");
+
+let fullscreenChart = null;
+
+/**
+ * Deep clone delle options ma *rimuove* tutte le funzioni.
+ * Restituisce un oggetto "safe" per Chart.create senza scriptable functions.
+ */
+function sanitizeOptions(obj) {
+  if (obj === null || obj === undefined) return obj;
+  if (typeof obj === "function") return undefined; // esclude funzioni
+  if (typeof obj !== "object") return obj;
+  if (Array.isArray(obj)) return obj.map(item => sanitizeOptions(item)).filter(i => i !== undefined);
+
+  const out = {};
+  for (const key of Object.keys(obj)) {
+    try {
+      const val = obj[key];
+      if (typeof val === "function") {
+        // salta completamente le funzioni
+        continue;
+      }
+      // evita di copiare proprietà che possono essere riferimenti circolari evidenti
+      const sanitized = sanitizeOptions(val);
+      if (sanitized !== undefined) out[key] = sanitized;
+    } catch (e) {
+      // se qualcosa va storto, ignoriamo quella proprietà
+      continue;
+    }
+  }
+  return out;
+}
+
+document.querySelectorAll(".fullscreenBtn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const section = btn.closest("section");
+    if (!section) return;
+
+    // Pulisce il contenuto precedente
+    fullscreenContent.innerHTML = "";
+
+    const canvas = section.querySelector("canvas");
+    const table = section.querySelector("table");
+    const firstDiv = section.querySelector("div");
+
+    // ---------- Grafico Chart.js -------------
+    if (canvas) {
+      const originalChart = Chart.getChart(canvas);
+      if (!originalChart) return;
+
+      // Clona i dati (labels + data) in maniera sicura
+      let chartData;
+      try {
+        chartData = typeof structuredClone === "function"
+          ? structuredClone(originalChart.data)
+          : JSON.parse(JSON.stringify(originalChart.data));
+      } catch (err) {
+        // fallback semplice: copia labels e dataset data numerici
+        chartData = {
+          labels: originalChart.data.labels ? [...originalChart.data.labels] : [],
+          datasets: (originalChart.data.datasets || []).map(ds => ({
+            label: ds.label,
+            data: Array.isArray(ds.data) ? [...ds.data] : [],
+            backgroundColor: Array.isArray(ds.backgroundColor) ? [...ds.backgroundColor] : ds.backgroundColor,
+            borderColor: Array.isArray(ds.borderColor) ? [...ds.borderColor] : ds.borderColor,
+            borderWidth: ds.borderWidth,
+            type: ds.type
+          }))
+        };
+      }
+
+      // Crea una versione "safe" delle options rimuovendo le funzioni/scriptable
+      const safeOptions = sanitizeOptions(originalChart.options) || {};
+      // Forza alcune impostazioni per fullscreen
+      safeOptions.responsive = true;
+      safeOptions.maintainAspectRatio = false;
+
+      const chartType = originalChart.config && originalChart.config.type ? originalChart.config.type : (originalChart.config && originalChart.config._config && originalChart.config._config.type) || "line";
+
+      // Crea canvas e mostra modal PRIMA del Chart
+      const newCanvas = document.createElement("canvas");
+      newCanvas.id = "chartFullscreen";
+      newCanvas.style.width = "100vw";
+      newCanvas.style.height = "85vh";
+      fullscreenContent.appendChild(newCanvas);
+      fullscreenModal.classList.remove("hidden");
+
+      // Crea il chart nel frame successivo per evitare il problema dimensioni 0
+      requestAnimationFrame(() => {
+        try {
+          // Distruggi eventuale chart precedente
+          if (fullscreenChart) {
+            try { fullscreenChart.destroy(); } catch(e) {}
+            fullscreenChart = null;
+          }
+
+          fullscreenChart = new Chart(newCanvas, {
+            type: chartType,
+            data: chartData,
+            options: safeOptions
+            // NOTA: non passiamo plugin espliciti qui (Chart usa i plugin registrati globalmente)
+          });
+        } catch (err) {
+          console.error("Errore creando chart fullscreen:", err);
+        }
+      });
+
+      return;
+    }
+
+    // ---------- Tabella ----------
+    if (table) {
+      const clone = table.cloneNode(true);
+      clone.classList.add("w-full");
+      fullscreenContent.classList.add("overflow-auto", "p-6");
+      fullscreenContent.appendChild(clone);
+      fullscreenModal.classList.remove("hidden");
+      return;
+    }
+
+    // ---------- Altro contenuto ----------
+    if (firstDiv) {
+      fullscreenContent.classList.remove("overflow-auto", "p-6");
+      fullscreenContent.appendChild(firstDiv.cloneNode(true));
+      fullscreenModal.classList.remove("hidden");
+    }
+  });
+});
+
+// Chiudi modal
+closeFullscreen.addEventListener("click", () => {
+  fullscreenModal.classList.add("hidden");
+  fullscreenContent.innerHTML = "";
+  if (fullscreenChart) {
+    try { fullscreenChart.destroy(); } catch(e) {}
+    fullscreenChart = null;
+  }
+});
 
 
 // === AVVIO ===
