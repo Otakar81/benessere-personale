@@ -1042,8 +1042,10 @@ function aggiornaTabellaResponsive(dati) {
       const cardTr = document.createElement("tr");
       const cardTd = document.createElement("td");
       cardTd.colSpan = 6;
+              
       cardTd.className =
-        "border p-3 rounded-lg bg-white shadow-sm mb-2 cursor-pointer transition hover:bg-gray-50";
+      "w-full max-w-[100vw] box-border border p-3 rounded-lg bg-white shadow-sm mb-2 cursor-pointer transition hover:bg-gray-50";
+
 
       cardTd.innerHTML = `
         <div class="flex justify-between items-center">
