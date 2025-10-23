@@ -212,7 +212,9 @@ function aggiornaDashboard() {
   });
 
   aggiornaGrafici(filtrati);
-  aggiornaTabella(filtrati);
+  // aggiornaTabella(filtrati);
+  aggiornaTabellaResponsive(filtrati);
+
   aggiornaRiepilogo(filtrati);
   aggiornaStatoPersonale(datiTotali);
 }
@@ -876,6 +878,8 @@ function aggiornaGraficoBenessere(dati, mode = "default") {
 
 
 // === TABELLA ===
+
+/* OLD DA CANCELLARE
 function aggiornaTabella(dati) {
   const tbody = document.querySelector("#dailyTable tbody");
   tbody.innerHTML = "";
@@ -982,6 +986,167 @@ function aggiornaTabella(dati) {
     tbody.appendChild(tr);
     tbody.appendChild(dettaglio);
   });
+} */
+
+function aggiornaTabellaResponsive(dati) {
+  const tbody = document.querySelector("#dailyTable tbody");
+  tbody.innerHTML = "";
+
+  const isMobile = window.innerWidth < 768; // breakpoint mobile (tailwind: md)
+
+  // Ordina i dati dalla più recente alla più vecchia
+  const datiOrdinati = [...dati].sort((a, b) => {
+    const [ga, ma, aa] = a.data.split("/");
+    const [gb, mb, ab] = b.data.split("/");
+    return new Date(`${ab}-${mb}-${gb}`) - new Date(`${aa}-${ma}-${ga}`);
+  });
+
+  datiOrdinati.forEach((d) => {
+    if (!isMobile) {
+      // --- DESKTOP / TABLET: tabella classica ---
+      const tr = document.createElement("tr");
+      tr.classList.add("cursor-pointer", "hover:bg-gray-50", "transition-colors");
+
+      tr.innerHTML = `
+        <td class="border p-2 flex items-center gap-2">
+          <span class="transition-transform duration-200 text-gray-500">▶</span>
+          <span>${d.data}</span>
+        </td>
+        <td class="border p-2 text-center">${d.kcalRange || "-"}</td>
+        <td class="border p-2 text-right">${d.passi ?? "-"}</td>
+        <td class="border p-2 text-center">${d.sonno || "-"}</td>
+        <td class="border p-2 text-center">${d.sensazioni ?? "-"}</td>
+        <td class="border p-2">${d.valutazione || "-"}</td>
+      `;
+
+      const dettaglioTr = document.createElement("tr");
+      dettaglioTr.classList.add("hidden", "bg-gray-50");
+      const dettaglioTd = creaDettaglioCell(d);
+      dettaglioTr.appendChild(dettaglioTd);
+
+      const freccia = tr.querySelector("span:first-child");
+      tr.addEventListener("click", () => {
+        dettaglioTr.classList.toggle("hidden");
+        freccia.style.transform = dettaglioTr.classList.contains("hidden")
+          ? "rotate(0deg)"
+          : "rotate(90deg)";
+        if (!dettaglioTr.classList.contains("hidden")) {
+          tr.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+
+      tbody.appendChild(tr);
+      tbody.appendChild(dettaglioTr);
+    } else {
+      // --- MOBILE: card singola + dettaglio nascosto ---
+      const cardTr = document.createElement("tr");
+      const cardTd = document.createElement("td");
+      cardTd.colSpan = 6;
+      cardTd.className =
+        "border p-3 rounded-lg bg-white shadow-sm mb-2 cursor-pointer transition hover:bg-gray-50";
+
+      cardTd.innerHTML = `
+        <div class="flex justify-between items-center">
+          <span class="font-semibold">📅 ${d.data}</span>
+          <span class="text-gray-500 text-sm">${d.sensazioni !== "-" ? `😊 ${d.sensazioni}` : ""}</span>
+        </div>
+        <div class="text-sm mt-1">
+          🔥 ${d.kcalRange || "-"} | 🚶 ${d.passi ?? "-"}
+        </div>
+        <div class="text-sm mt-1">
+          😴 ${d.sonno || "-"}
+        </div>
+        <div class="text-xs mt-2 text-gray-700 line-clamp-3">
+          💬 ${d.valutazione || "-"}
+        </div>
+      `;
+
+      // Riga dettaglio nascosta di default
+      const dettaglioTr = document.createElement("tr");
+      dettaglioTr.classList.add("hidden", "bg-gray-50");
+      const dettaglioTd = creaDettaglioCell(d);
+      dettaglioTr.appendChild(dettaglioTd);
+
+      cardTd.addEventListener("click", () => {
+        dettaglioTr.classList.toggle("hidden");
+        cardTd.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      cardTr.appendChild(cardTd);
+      tbody.appendChild(cardTr);
+      tbody.appendChild(dettaglioTr);
+    }
+  });
+}
+
+// --- 🔧 Funzione helper: crea la cella dei dettagli (responsive grid) ---
+function creaDettaglioCell(d) {
+
+    // Calcolo distribuzione Kcal per pasto
+    const pasti = [
+      { label: "Colazione", kcal: d.kcalColazione },
+      { label: "Snack Mattutino", kcal: d.kcalSnackMattutino },
+      { label: "Pranzo", kcal: d.kcalPranzo },
+      { label: "Snack Pomeridiano", kcal: d.kcalSnackPomeridiano },
+      { label: "Cena", kcal: d.kcalCena },
+      { label: "Snack Serale", kcal: d.kcalSnackSerale },
+    ];
+
+    const tot = pasti.reduce((s, p) => s + (p.kcal || 0), 0);
+
+    // Colori distinti per ogni pasto
+    const colors = ["#3b82f6", "#a855f7", "#10b981", "#f59e0b", "#f97316", "#ec4899"];
+
+    // Crea barra colorata
+    let barraDistribuzione = "";
+
+    if (tot > 0) {
+      const segmenti = pasti.map((p, i) => {
+        const perc = ((p.kcal || 0) / tot) * 100;
+        if (!perc) return "";
+        // Ogni sezione: barra + etichetta
+        return `
+          <div class="flex flex-col items-center" style="width:${perc}%;">
+            <div style="background:${colors[i]}; height:12px; width:100%; border-radius:2px;"></div>
+            <span class="text-[10px] text-gray-600 mt-1 whitespace-nowrap">
+              ${p.label.split(" ")[0]} ${Math.round(perc)}%
+            </span>
+          </div>
+        `;
+      }).join("");
+
+      barraDistribuzione = `
+        <div class="mt-4">
+          <p class="text-xs text-gray-600 text-center mt-2">Distribuzione kcal giornaliera</p>
+
+          <div class="flex justify-between items-end w-full text-center">
+            ${segmenti}
+          </div>
+        </div>
+      `;
+    }
+
+
+  const td = document.createElement("td");
+  td.colSpan = 6;
+  td.className = "p-4 text-sm text-gray-700 leading-relaxed";
+
+  // layout responsivo: 2 colonne su desktop, 1 colonna su mobile
+  td.innerHTML = `
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+      <div><strong>🍽 Colazione:</strong> ${d.colazione || "-"}</div>
+      <div><strong>🥤 Snack Mattutino:</strong> ${d.snackMattutino || "-"}</div>
+      <div><strong>🍝 Pranzo:</strong> ${d.pranzo || "-"}</div>
+      <div><strong>🍪 Snack Pomeridiano:</strong> ${d.snackPomeridiano || "-"}</div>
+      <div><strong>🍲 Cena:</strong> ${d.cena || "-"}</div>
+      <div><strong>🍫 Snack Serale:</strong> ${d.snackSerale || "-"}</div>
+      <div class="col-span-1 sm:col-span-2"><strong>🏃‍♂️ Attività fisica:</strong> ${d.attivita || "-"}</div>
+      <div class="col-span-1 sm:col-span-2"><strong>📝 Note / Eventi:</strong> ${d.note || "-"}</div>
+
+      <div class="col-span-1 sm:col-span-2">${barraDistribuzione}</div>
+    </div>
+  `;
+  return td;
 }
 
 
