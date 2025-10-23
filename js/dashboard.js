@@ -117,8 +117,8 @@ document.getElementById("togglePeso").addEventListener("click", () => {
   // Aggiorna titolo
   const titolo = document.getElementById("titoloPeso");
   titolo.textContent = (next === "default")
-    ? "📈 Andamento Peso / BMI"
-    : "🧍‍♂️ Composizione corporea (% Grasso / % Muscolo)";
+    ? "📈 Peso / BMI"
+    : "🧍‍♂️ Composizione corporea";
 });
 
 // === Toggle grafico Kcal ===
@@ -142,8 +142,8 @@ document.getElementById("toggleKcal").addEventListener("click", (event) => {
     next === "default"
       ? "🔥 Kcal giornaliere"
       : next === "distribuzione"
-        ? "🥧 Distribuzione Kcal per pasto (periodo selezionato)"
-        : "📆 Confronto Kcal per pasto (feriali vs weekend)";
+        ? "🥧 Distribuzione per pasto"
+        : "📆 Feriali vs weekend";
 });
 
 // === Toggle grafico Passi / Attività fisica ===
@@ -157,9 +157,34 @@ document.getElementById("togglePassi").addEventListener("click", (event) => {
 
   const titolo = document.getElementById("titoloPassi");
   titolo.textContent = (next === "default")
-    ? "🚶 Passi giornalieri"
-    : "🔥 Attività fisica (Kcal consumate)";
+    ? "🚶 Num. Passi"
+    : "🔥 Attività fisica";
 });
+
+
+// === Toggle grafico Benessere (Sonno / Sensazioni) ===
+document.getElementById("toggleBenessere").addEventListener("click", (event) => {
+  const btn = event.target;
+  const current = btn.dataset.mode;
+  const next =
+    current === "default" ? "sensazioni" :
+    current === "sensazioni" ? "correlazione" :
+    "default";
+
+  btn.dataset.mode = next;
+
+  aggiornaGraficoBenessere(getDatiFiltrati(), next);
+
+  const titolo = document.getElementById("titoloBenessere");
+  titolo.textContent =
+    next === "default"
+      ? "💤 Ore di sonno"
+      : next === "sensazioni"
+        ? "😊 Sensazioni"
+        : "📈 Sonno ↔ Sensazioni";
+});
+
+
 
 
 
@@ -208,6 +233,9 @@ function aggiornaGrafici(dati) {
 
   // === GRAFICO 3: Passi -> Attività fisica (da implementare) ===
   aggiornaGraficoPassi(dati);
+
+  // === GRAFICO 4: Benessere (Sonno / Sensazioni) ===
+  aggiornaGraficoBenessere(dati);
 
 } // Fine aggiornaGrafici
 
@@ -630,6 +658,218 @@ function aggiornaGraficoPassi(dati, mode = "default") {
     document.getElementById("riepilogoAttivita").className = `mt-3 text-center text-sm font-semibold ${colore}`;
     document.getElementById("riepilogoAttivita").textContent =
       `${emoji} Media ${media.toFixed(0)} kcal/giorno — livello ${livello}`;
+  }
+}
+
+
+let chartBenessere;
+
+function aggiornaGraficoBenessere(dati, mode = "default") {
+  const ctx = document.getElementById("chartBenessere");
+  const riepilogoEl = document.getElementById("riepilogoBenessere");
+  if (!ctx) return;
+  if (chartBenessere) chartBenessere.destroy();
+  riepilogoEl.textContent = "";
+
+  // === VISTA 1: ORE DI SONNO ===
+  if (mode === "default") {
+    const labels = dati.map(d => d.data);
+    const ore = dati.map(d => {
+      const [hh, mm] = (d.sonno || "0:0").split(":");
+      return parseInt(hh) + (parseInt(mm) / 60);
+    }).filter(v => !isNaN(v) && v > 0);
+
+    const backgroundColors = dati.map(d => {
+      const [gg, mm, aaaa] = d.data.split("/");
+      const day = new Date(`${aaaa}-${mm}-${gg}`).getDay();
+      return (day === 0 || day === 6)
+        ? "rgba(249,115,22,0.6)"  // weekend
+        : "rgba(37,99,235,0.5)";  // feriali
+    });
+
+    const oreConsigliate = 8;
+
+    chartBenessere = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: dati.map(d => d.data),
+        datasets: [{
+          label: "Ore di sonno",
+          data: dati.map(d => {
+            const [hh, mm] = (d.sonno || "0:0").split(":");
+            return parseInt(hh) + (parseInt(mm) / 60);
+          }),
+          backgroundColor: backgroundColors,
+          borderColor: "#2563eb",
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            suggestedMax: 10,
+            title: { display: true, text: "Ore di sonno" }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          annotation: {
+            annotations: {
+              soglia: {
+                type: 'line',
+                yMin: oreConsigliate,
+                yMax: oreConsigliate,
+                borderColor: 'rgba(220,38,38,0.8)',
+                borderWidth: 2,
+                borderDash: [6, 6],
+                label: {
+                  enabled: true,
+                  content: `Soglia consigliata: ${oreConsigliate}h`,
+                  position: 'end',
+                  color: '#dc2626',
+                  backgroundColor: 'rgba(220,38,38,0.1)',
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Media ore sonno nel periodo
+    if (ore.length) {
+      const media = ore.reduce((a,b)=>a+b,0)/ore.length;
+      riepilogoEl.innerHTML = `
+        😴 <strong>Media ore di sonno:</strong> ${media.toFixed(1)}h<br>
+        📊 Barre colorate = feriali (blu) / weekend (arancioni)
+      `;
+    } else {
+      riepilogoEl.textContent = "ℹ️ Nessun dato disponibile sul sonno";
+    }
+
+    return;
+  }
+
+  // === VISTA 2: SENSAZIONI (1–5) ===
+  if (mode === "sensazioni") {
+    const labels = dati.map(d => d.data);
+    const sensazioni = dati.map(d => parseFloat(d.sensazioni) || null);
+
+    chartBenessere = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "Sensazioni (1–5)",
+          data: sensazioni,
+          borderColor: "#f59e0b",
+          backgroundColor: "rgba(245,158,11,0.2)",
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: "#f59e0b"
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            min: 0,
+            max: 5,
+            ticks: { stepSize: 1 },
+            title: { display: true, text: "Livello sensazione" }
+          }
+        },
+        plugins: {
+          legend: { position: "top" },
+          tooltip: {
+            callbacks: {
+              label: ctx => `Sensazione: ${ctx.parsed.y.toFixed(1)}`
+            }
+          }
+        }
+      }
+    });
+
+    const media = sensazioni.filter(Boolean);
+    if (media.length) {
+      const m = media.reduce((a, b) => a + b, 0) / media.length;
+      riepilogoEl.textContent = `😊 Media sensazioni periodo: ${m.toFixed(2)} / 5`;
+    } else {
+      riepilogoEl.textContent = "ℹ️ Nessun dato di sensazioni disponibile";
+    }
+    return;
+  }
+
+  // === VISTA 3: CORRELAZIONE SONNO ↔ SENSAZIONI ===
+  if (mode === "correlazione") {
+    const punti = dati
+      .map(d => {
+        const [hh, mm] = (d.sonno || "0:0").split(":");
+        const ore = parseInt(hh) + (parseInt(mm) / 60);
+        const sens = parseFloat(d.sensazioni);
+        return (!isNaN(ore) && !isNaN(sens)) ? { x: ore, y: sens, label: d.data } : null;
+      })
+      .filter(Boolean);
+
+    if (punti.length >= 3) {
+      const xs = punti.map(p => p.x);
+      const ys = punti.map(p => p.y);
+      const meanX = xs.reduce((a,b)=>a+b,0)/xs.length;
+      const meanY = ys.reduce((a,b)=>a+b,0)/ys.length;
+      const num = xs.reduce((sum,i,idx)=>sum + (i-meanX)*(ys[idx]-meanY),0);
+      const den = Math.sqrt(xs.reduce((s,i)=>s+(i-meanX)**2,0) * ys.reduce((s,i)=>s+(i-meanY)**2,0));
+      const corr = num/den;
+
+      let emoji = corr > 0.5 ? "🟢" : corr < -0.5 ? "🔴" : "🟡";
+      riepilogoEl.textContent = `${emoji} Correlazione stimata (Pearson r): ${corr.toFixed(2)} — `;
+      riepilogoEl.textContent += corr > 0
+        ? "più dormi → migliori sensazioni"
+        : corr < 0
+          ? "più dormi → peggiori sensazioni (!)"
+          : "nessuna relazione evidente";
+    } else {
+      riepilogoEl.textContent = "ℹ️ Dati insufficienti per calcolare la correlazione";
+    }
+
+    chartBenessere = new Chart(ctx, {
+      type: "scatter",
+      data: {
+        datasets: [{
+          label: "Correlazione sonno ↔ sensazioni",
+          data: punti,
+          backgroundColor: "rgba(37,99,235,0.6)",
+          borderColor: "#2563eb",
+          pointRadius: 5
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => `📅 ${ctx.raw.label} → ${ctx.raw.x.toFixed(1)}h / sensazione ${ctx.raw.y}`
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: "Ore di sonno" },
+            min: 4,
+            max: 10
+          },
+          y: {
+            title: { display: true, text: "Sensazioni (1–5)" },
+            min: 0,
+            max: 5,
+            ticks: { stepSize: 1 }
+          }
+        }
+      }
+    });
   }
 }
 
