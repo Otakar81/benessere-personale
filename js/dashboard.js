@@ -1037,7 +1037,9 @@ function aggiornaTabellaResponsive(dati) {
 
       tbody.appendChild(tr);
       tbody.appendChild(dettaglioTr);
+
     } else {
+
       // --- MOBILE: card singola + dettaglio nascosto ---
       const cardTr = document.createElement("tr");
       const cardTd = document.createElement("td");
@@ -1058,7 +1060,7 @@ function aggiornaTabellaResponsive(dati) {
         <div class="text-sm mt-1">
           😴 ${d.sonno || "-"}
         </div>
-        <div class="text-xs mt-2 text-gray-700 line-clamp-3">
+        <div class="text-xs mt-2 text-gray-700 whitespace-pre-wrap break-words">
           💬 ${d.valutazione || "-"}
         </div>
       `;
@@ -1499,6 +1501,24 @@ closeFullscreen.addEventListener("click", () => {
   if (fullscreenChart) {
     try { fullscreenChart.destroy(); } catch(e) {}
     fullscreenChart = null;
+  }
+});
+
+// === 🔁 Adattamento dinamico layout (mobile ↔ desktop) ===
+let lastIsMobile = window.innerWidth < 768;
+
+window.addEventListener("resize", () => {
+  const isMobile = window.innerWidth < 768;
+  if (isMobile !== lastIsMobile) {
+    lastIsMobile = isMobile;
+
+    // Mostra o nasconde il thead in base alla modalità
+    const thead = document.querySelector("#dailyTable thead");
+    if (thead) thead.style.display = isMobile ? "none" : "table-header-group";
+
+    // Ricalcola la tabella in base alla nuova dimensione
+    const filtrati = getDatiFiltrati();
+    aggiornaTabellaResponsive(filtrati);
   }
 });
 
