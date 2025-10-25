@@ -323,7 +323,7 @@ function aggiornaGraficoPeso(dati, mode = "default") {
         responsive: true,
         plugins: { legend: { position: "top" } },
         scales: {
-          y: { beginAtZero: true, title: { display: true, text: "%" } }
+          y: { min: 15, max: 50, title: { display: true, text: "%" } }
         }
       }
     });
@@ -587,7 +587,23 @@ function aggiornaGraficoPassi(dati, mode = "default") {
       }
     });
 
-    document.getElementById("riepilogoAttivita").textContent = "";
+    // === Riepilogo sintetico anche per la vista "Passi" ===
+    const passiValidi = passi.filter(Boolean);
+
+    if (passiValidi.length) {
+      const media = passiValidi.reduce((a, b) => a + b, 0) / passiValidi.length;
+
+      let livello, colore, emoji;
+      if (media >= 10000) { livello = "Ottimo"; colore = "text-green-600"; emoji = "🏆"; }
+      else if (media >= 8000) { livello = "Buono"; colore = "text-blue-600"; emoji = "🚶‍♂️"; }
+      else if (media >= 5000) { livello = "Basso"; colore = "text-yellow-600"; emoji = "⚠️"; }
+      else { livello = "Molto basso"; colore = "text-red-600"; emoji = "🛋️"; }
+
+      const riepilogoEl = document.getElementById("riepilogoAttivita");
+      riepilogoEl.className = `mt-3 text-center text-sm font-semibold ${colore}`;
+      riepilogoEl.textContent = `${emoji} Media ${media.toFixed(0)} passi/giorno — livello ${livello}`;
+    }
+
     return;
   }
 
@@ -878,116 +894,6 @@ function aggiornaGraficoBenessere(dati, mode = "default") {
 
 
 // === TABELLA ===
-
-/* OLD DA CANCELLARE
-function aggiornaTabella(dati) {
-  const tbody = document.querySelector("#dailyTable tbody");
-  tbody.innerHTML = "";
-
-  // Ordina i dati dalla più recente alla più vecchia
-  const datiOrdinati = [...dati].sort((a, b) => {
-    const [ga, ma, aa] = a.data.split("/");
-    const [gb, mb, ab] = b.data.split("/");
-    return new Date(`${ab}-${mb}-${gb}`) - new Date(`${aa}-${ma}-${ga}`);
-  });
-
-  datiOrdinati.forEach((d) => {
-    // Riga principale (riepilogo)
-    const tr = document.createElement("tr");
-    tr.classList.add("cursor-pointer", "hover:bg-gray-50", "transition-colors");
-
-    tr.innerHTML = `
-      <td class="border p-2 flex items-center gap-2">
-        <span class="transition-transform duration-200 text-gray-500">▶</span>
-        <span>${d.data}</span>
-      </td>
-      <td class="border p-2 text-center">${d.kcalRange || "-"}</td>
-      <td class="border p-2 text-right">${d.passi ?? "-"}</td>
-      <td class="border p-2 text-center">${d.sonno || "-"}</td>
-      <td class="border p-2 text-center">${d.sensazioni ?? "-"}</td>
-      <td class="border p-2">${d.valutazione || "-"}</td>
-    `;
-
-    // Riga dettaglio (inizialmente nascosta)
-    const dettaglio = document.createElement("tr");
-    dettaglio.classList.add("hidden", "bg-gray-50");
-
-    // Calcolo distribuzione Kcal per pasto
-    const pasti = [
-      { label: "Colazione", kcal: d.kcalColazione },
-      { label: "Snack Mattutino", kcal: d.kcalSnackMattutino },
-      { label: "Pranzo", kcal: d.kcalPranzo },
-      { label: "Snack Pomeridiano", kcal: d.kcalSnackPomeridiano },
-      { label: "Cena", kcal: d.kcalCena },
-      { label: "Snack Serale", kcal: d.kcalSnackSerale },
-    ];
-    const tot = pasti.reduce((s, p) => s + (p.kcal || 0), 0);
-
-    // Colori distinti per ogni pasto
-    const colors = ["#3b82f6", "#a855f7", "#10b981", "#f59e0b", "#f97316", "#ec4899"];
-
-    // Crea barra colorata
-    let barraDistribuzione = "";
-
-    if (tot > 0) {
-      const segmenti = pasti.map((p, i) => {
-        const perc = ((p.kcal || 0) / tot) * 100;
-        if (!perc) return "";
-        // Ogni sezione: barra + etichetta
-        return `
-          <div class="flex flex-col items-center" style="width:${perc}%;">
-            <div style="background:${colors[i]}; height:12px; width:100%; border-radius:2px;"></div>
-            <span class="text-[10px] text-gray-600 mt-1 whitespace-nowrap">
-              ${p.label.split(" ")[0]} ${Math.round(perc)}%
-            </span>
-          </div>
-        `;
-      }).join("");
-
-      barraDistribuzione = `
-        <div class="mt-4">
-          <p class="text-xs text-gray-600 text-center mt-2">Distribuzione kcal giornaliera</p>
-
-          <div class="flex justify-between items-end w-full text-center">
-            ${segmenti}
-          </div>
-        </div>
-      `;
-    }
-
-
-    dettaglio.innerHTML = `
-      <td colspan="6" class="p-4 text-sm text-gray-700 leading-relaxed">
-        <div class="grid grid-cols-2 gap-x-6 gap-y-2">
-          <div><strong>🍽 Colazione:</strong> ${d.colazione || "-"}</div>
-          <div><strong>🥤 Snack Mattutino:</strong> ${d.snackMattutino || "-"}</div>
-          <div><strong>🍝 Pranzo:</strong> ${d.pranzo || "-"}</div>
-          <div><strong>🍪 Snack Pomeridiano:</strong> ${d.snackPomeridiano || "-"}</div>
-          <div><strong>🍲 Cena:</strong> ${d.cena || "-"}</div>
-          <div><strong>🍫 Snack Serale:</strong> ${d.snackSerale || "-"}</div>
-          <div class="col-span-2"><strong>🏃‍♂️ Attività fisica:</strong> ${d.attivita || "-"}</div>
-          <div class="col-span-2"><strong>📝 Note / Eventi:</strong> ${d.note || "-"}</div>
-        </div>
-
-        ${barraDistribuzione}
-      </td>
-    `;
-
-
-    // Gestione click per apertura/chiusura
-    const freccia = tr.querySelector("span:first-child");
-    tr.addEventListener("click", () => {
-      dettaglio.classList.toggle("hidden");
-      freccia.style.transform = dettaglio.classList.contains("hidden")
-        ? "rotate(0deg)"
-        : "rotate(90deg)";
-    });
-
-    tbody.appendChild(tr);
-    tbody.appendChild(dettaglio);
-  });
-} */
-
 function aggiornaTabellaResponsive(dati) {
   const tbody = document.querySelector("#dailyTable tbody");
   tbody.innerHTML = "";
@@ -1505,6 +1411,7 @@ closeFullscreen.addEventListener("click", () => {
 });
 
 // === 🔁 Adattamento dinamico layout (mobile ↔ desktop) ===
+/*
 let lastIsMobile = window.innerWidth < 768;
 
 window.addEventListener("resize", () => {
@@ -1521,6 +1428,39 @@ window.addEventListener("resize", () => {
     aggiornaTabellaResponsive(filtrati);
   }
 });
+*/
+
+// === 🔁 Adattamento dinamico layout (mobile ↔ desktop) ===
+let lastIsMobile = window.innerWidth < 768;
+
+function ridisegnaTabellaSeNecessario() {
+  const isMobile = window.innerWidth < 768;
+  if (isMobile !== lastIsMobile) {
+    lastIsMobile = isMobile;
+
+    // Mostra o nasconde il thead in base alla modalità
+    const thead = document.querySelector("#dailyTable thead");
+    if (thead) thead.style.display = isMobile ? "none" : "table-header-group";
+
+    // Ricalcola la tabella
+    const filtrati = getDatiFiltrati();
+    aggiornaTabellaResponsive(filtrati);
+  }
+}
+
+// Listener principale su resize
+window.addEventListener("resize", () => {
+  // piccola attesa per permettere il ricalcolo del viewport
+  clearTimeout(window._resizeTimer);
+  window._resizeTimer = setTimeout(ridisegnaTabellaSeNecessario, 200);
+});
+
+// Gestione orientamento mobile
+window.addEventListener("orientationchange", () => {
+  // forza il ridisegno dopo un breve delay
+  setTimeout(ridisegnaTabellaSeNecessario, 300);
+});
+
 
 
 // === AVVIO ===
