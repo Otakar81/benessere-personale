@@ -705,7 +705,7 @@ function aggiornaGraficoBenessere(dati, mode = "default") {
         : "rgba(37,99,235,0.5)";  // feriali
     });
 
-    const oreConsigliate = 8;
+    const oreConsigliate = 7;
 
     chartBenessere = new Chart(ctx, {
       type: "bar",
@@ -1017,7 +1017,7 @@ function creaDettaglioCell(d) {
         // Ogni sezione: barra + etichetta
         return `
           <div class="flex flex-col items-center" style="width:${perc}%;">
-            <div style="background:${colors[i]}; height:12px; width:100%; border-radius:2px;"></div>
+            <div title="${p.kcal} Kcal" style="background:${colors[i]}; height:12px; width:100%; border-radius:2px;"></div>
             <span class="text-[10px] text-gray-600 mt-1 whitespace-nowrap">
               ${p.label.split(" ")[0]} ${Math.round(perc)}%
             </span>
