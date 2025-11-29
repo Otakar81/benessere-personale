@@ -338,7 +338,7 @@ function aggiornaGraficoKcal(dati, mode = "default") {
   if (mode === "default") {
     const labels = dati.map(d => d.data);
     const kcal = dati.map(d => d.kcal);
-    const fabbisognoMedio = 2200;
+    const fabbisognoMedio = 1900;
 
     // Colori weekend
     const backgroundColors = dati.map(d => {
