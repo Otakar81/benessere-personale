@@ -608,6 +608,98 @@ function aggiornaGraficoPassi(dati, mode = "default") {
   }
 
   // === VISTA 2: Attività fisica (Kcal consumate) ===
+    if (mode === "attivita") {
+
+      // Livelli di attività predefiniti, per il grafico
+      const livelloAlto = 500;
+      const livelloMedio = 250;
+
+      const labels = dati.map(d => d.data);
+      const kcal = dati.map(d => Number(d.kcalConsumate) || 0);
+
+      // Media mobile (rolling) su N giorni: per i primi giorni usa finestra "parziale"
+      const rollingAverage = (values, window = 7) => {
+        return values.map((_, i) => {
+          const start = Math.max(0, i - window + 1);
+          const slice = values.slice(start, i + 1);
+          const sum = slice.reduce((a, b) => a + b, 0);
+          return sum / slice.length;
+        });
+      };
+
+      const kcalMA7 = rollingAverage(kcal, 7);
+
+      // Definizione soglie e colori
+      const backgroundColors = kcal.map(v => {
+        if (v >= livelloAlto) return "rgba(34,197,94,0.8)";   // verde - alta attività
+        if (v >= livelloMedio) return "rgba(234,179,8,0.8)";  // giallo - moderata
+        return "rgba(239,68,68,0.8)";                         // rosso - bassa
+      });
+
+      chartPassi = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [{
+            label: "Kcal consumate",
+            data: kcal,
+            backgroundColor: backgroundColors,
+            borderColor: "#fff",
+            borderWidth: 1,
+          },
+          {
+            label: "Media mobile 7gg",
+            data: kcalMA7,
+            type: "line",
+            borderColor: "#2563eb",
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: "y",
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: "Kcal consumate" }
+            }
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  const val = ctx.parsed.y;
+                  if (ctx.dataset.label === "Media mobile 7gg") {
+                    return `Media 7gg: ${val.toFixed(0)} kcal`;
+                  }
+                  return `${val.toFixed(0)} kcal`;
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // === Riepilogo sintetico ===
+      const kcalValidi = kcal.filter(v => Number.isFinite(v) && v > 0);
+      const media = kcalValidi.length
+        ? kcalValidi.reduce((a, b) => a + b, 0) / kcalValidi.length
+        : 0;
+
+      let livello, colore, emoji;
+      if (media >= livelloAlto) { livello = "Alta attività"; colore = "text-green-600"; emoji = "💪"; }
+      else if (media >= livelloMedio) { livello = "Moderata"; colore = "text-yellow-600"; emoji = "🏃"; }
+      else { livello = "Bassa"; colore = "text-red-600"; emoji = "🛋"; }
+
+      document.getElementById("riepilogoAttivita").className = `mt-3 text-center text-sm font-semibold ${colore}`;
+      document.getElementById("riepilogoAttivita").textContent =
+        `${emoji} Media ${media.toFixed(0)} kcal/giorno — livello ${livello}`;
+    }
+
+  /*
   if (mode === "attivita") {
 
     // Livelli di attività predefiniti, per il grafico
@@ -677,6 +769,9 @@ function aggiornaGraficoPassi(dati, mode = "default") {
     document.getElementById("riepilogoAttivita").textContent =
       `${emoji} Media ${media.toFixed(0)} kcal/giorno — livello ${livello}`;
   }
+  */
+
+
 }
 
 
