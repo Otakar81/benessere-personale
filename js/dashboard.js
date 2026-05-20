@@ -2,9 +2,270 @@
 const SHEET_ID = "1VITx37L378SVjvHV0cfYBeu0cqMZG7pe7bPgVuGP4uc";
 const SHEET_NAME = "Foglio1"; // aggiorna se diverso
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${SHEET_NAME}`;
+const DAILY_KCAL_TARGET = 1900;
+const DAILY_KCAL_TARGET_TOLERANCE = 50;
+const FOOD_DICTIONARY_URL = "data/food_dictionary.json";
+const FOOD_DICTIONARY_CACHE_BUSTER = "2026-05-20-1";
 
 let datiTotali = [];
 let chartPeso, chartKcal, chartPassi;
+let foodDictionary = null;
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+async function loadFoodDictionary() {
+  if (foodDictionary) {
+    return foodDictionary;
+  }
+
+  const dictionaryUrl = `${FOOD_DICTIONARY_URL}?v=${FOOD_DICTIONARY_CACHE_BUSTER}`;
+  const response = await fetch(dictionaryUrl, { cache: "no-store" });
+
+  if (!response.ok) {
+    throw new Error("Impossibile caricare food_dictionary.json");
+  }
+
+  foodDictionary = await response.json();
+  return foodDictionary;
+}
+
+function parseDashboardDate(dateValue) {
+  if (!dateValue || typeof dateValue !== "string") return null;
+
+  const [gg, mm, aaaa] = dateValue.split("/");
+  if (!gg || !mm || !aaaa) return null;
+
+  const parsed = new Date(`${aaaa}-${mm}-${gg}T00:00:00`);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function renderLiveCaloriesEmpty(message, note = "") {
+  const card = document.getElementById("liveCaloriesCard");
+  if (!card) return;
+
+  card.innerHTML = `
+    <div class="flex items-center gap-2">
+      <span class="text-2xl" aria-hidden="true">🍽️</span>
+      <h2 class="text-xl font-semibold text-gray-800 sm:text-2xl">Kcal provvisorie oggi</h2>
+    </div>
+    <p class="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+      ${escapeHtml(message)}
+    </p>
+    ${note ? `<p class="mt-3 text-sm leading-relaxed text-slate-500">${escapeHtml(note)}</p>` : ""}
+  `;
+}
+
+function renderLiveCaloriesCard(result, target) {
+  const card = document.getElementById("liveCaloriesCard");
+  if (!card) return;
+
+  const residualInfo = window.liveCaloriesUtils.computeCalorieResidual(
+    result.total,
+    target,
+    DAILY_KCAL_TARGET_TOLERANCE
+  );
+
+  let residualLabel = "Residuo non disponibile";
+  let residualClass = "text-slate-600";
+
+  if (residualInfo.status === "remaining") {
+    residualLabel = `Residuo ${residualInfo.amount} kcal`;
+    residualClass = "text-emerald-600";
+  } else if (residualInfo.status === "exceeded") {
+    residualLabel = `Sforamento ${residualInfo.amount} kcal`;
+    residualClass = "text-rose-600";
+  } else if (residualInfo.status === "balanced") {
+    residualLabel = "Target centrato";
+    residualClass = "text-blue-600";
+  }
+
+  const matchedCount = result.matched.length;
+  const unmatchedCount = result.unmatched.length;
+  const partialCount = result.matched.filter(item => item.estimationMode === "components").length;
+  const sourceLabel = item => {
+    if (item.source === "inline-kcal") return "valore dichiarato";
+    if (item.source === "derived") return "voce derived";
+    return "voce historical";
+  };
+  const detailsRows = [
+    ...result.matched.map(item => {
+      const score = Math.round(item.score * 100);
+      const componentCoverage = item.totalComponents > 1
+        ? `${item.matchedComponentCount}/${item.totalComponents} componenti stimati`
+        : "stima parziale";
+
+      if (item.estimationMode === "components") {
+        const componentRows = [
+          ...item.matchedComponents.map(component => {
+            const componentScore = Math.round(component.score * 100);
+            const componentIcon = component.matchType === "exact" ? "✓" : "~";
+            const componentColor = component.matchType === "exact" ? "text-emerald-600" : "text-amber-500";
+            const confidenceText = component.matchType === "exact"
+              ? ""
+              : ` (confidenza ${componentScore}%)`;
+            const renderedComponentIcon = component.source === "inline-kcal"
+              ? "≈"
+              : componentIcon;
+            const renderedComponentColor = component.source === "inline-kcal"
+              ? "text-blue-600"
+              : componentColor;
+            const renderedConfidenceText = component.source === "inline-kcal"
+              ? ` (${sourceLabel(component)})`
+              : component.matchType === "exact"
+                ? ` (${sourceLabel(component)})`
+                : ` (confidenza ${componentScore}%, ${sourceLabel(component)})`;
+
+            return `
+              <div class="text-xs leading-relaxed text-slate-500 sm:text-sm">
+                <span class="font-semibold ${renderedComponentColor}">${renderedComponentIcon}</span>
+                ${escapeHtml(component.input)} → <strong>${component.kcal} kcal</strong>${renderedConfidenceText}
+              </div>
+            `;
+          }),
+          ...item.unmatchedComponents.map(component => `
+            <div class="text-xs leading-relaxed text-slate-500 sm:text-sm">
+              <span class="font-semibold text-rose-600">!</span>
+              ${escapeHtml(component.input)} → non stimato
+            </div>
+          `)
+        ].join("");
+
+        return `
+          <li>
+            <div>
+              <span class="font-semibold text-amber-500">~</span>
+              ${escapeHtml(item.label)}: ${escapeHtml(item.input)} → <strong>${item.kcal} kcal</strong>
+              <span class="text-slate-500">(stima parziale, ${componentCoverage})</span>
+            </div>
+            <div class="mt-1 space-y-1 pl-5">
+              ${componentRows}
+            </div>
+          </li>
+        `;
+      }
+
+      if (item.matchType === "exact") {
+        return `<li><span class="font-semibold text-emerald-600">✓</span> ${escapeHtml(item.label)}: ${escapeHtml(item.input)} → <strong>${item.kcal} kcal</strong> <span class="text-slate-500">(${sourceLabel(item)})</span></li>`;
+      }
+
+      if (item.matchType === "inline-kcal") {
+        return `<li><span class="font-semibold text-blue-600">≈</span> ${escapeHtml(item.label)}: ${escapeHtml(item.input)} → <strong>${item.kcal} kcal</strong> <span class="text-slate-500">(valore dichiarato)</span></li>`;
+      }
+
+      return `<li><span class="font-semibold text-amber-500">~</span> ${escapeHtml(item.label)}: ${escapeHtml(item.input)} stimato da "${escapeHtml(item.matchedKey)}" → <strong>${item.kcal} kcal</strong> (confidenza ${score}%, ${sourceLabel(item)})</li>`;
+    }),
+    ...result.unmatched.map(item =>
+      `<li><span class="font-semibold text-rose-600">!</span> ${escapeHtml(item.label)}: ${escapeHtml(item.input)} → non stimato</li>`
+    )
+  ].join("");
+
+  card.innerHTML = `
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+      <div class="w-full sm:max-w-2xl">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl" aria-hidden="true">🍽️</span>
+          <h2 class="text-xl font-semibold text-gray-800 sm:text-2xl">Kcal provvisorie oggi</h2>
+        </div>
+        <p class="mt-2 text-sm leading-relaxed text-slate-500 sm:text-base">
+          ${matchedCount} pasti riconosciuti · ${unmatchedCount} ${unmatchedCount === 1 ? "non riconosciuto" : "non riconosciuti"}
+        </p>
+        ${partialCount > 0 ? `
+          <p class="mt-1 text-sm leading-relaxed text-amber-600 sm:text-base">
+            ${partialCount} ${partialCount === 1 ? "stima parziale" : "stime parziali"} da componenti
+          </p>
+        ` : ""}
+      </div>
+
+      <div class="w-full rounded-2xl bg-blue-50 px-4 py-3 sm:w-auto sm:min-w-[220px] sm:text-right">
+        <div class="text-2xl font-bold text-slate-900 sm:text-3xl">≈ ${result.total} kcal</div>
+        <div class="mt-1 text-sm font-medium text-slate-600">Affidabilita: ${escapeHtml(result.reliability)}</div>
+        <div class="mt-1 text-sm font-semibold ${residualClass}">${escapeHtml(residualLabel)}</div>
+      </div>
+    </div>
+
+    <p class="mt-4 text-sm leading-relaxed text-slate-500">
+      Stima indicativa calcolata dallo storico personale. Il valore definitivo resta quello elaborato da Gemini.
+    </p>
+
+    ${detailsRows ? `
+      <details class="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+        <summary class="cursor-pointer text-sm font-semibold text-slate-700 marker:text-blue-600">
+          Mostra dettagli stima
+        </summary>
+        <ul class="mt-3 space-y-2 text-sm leading-relaxed text-slate-600">
+          ${detailsRows}
+        </ul>
+      </details>
+    ` : ""}
+  `;
+}
+
+async function aggiornaStimaLiveOggi(dati) {
+  if (!window.liveCaloriesUtils) {
+    renderLiveCaloriesEmpty(
+      "Stima kcal live non disponibile.",
+      "La dashboard resta consultabile, ma la logica locale di stima non e' stata caricata correttamente."
+    );
+    return;
+  }
+
+  let dictionary;
+
+  try {
+    dictionary = await loadFoodDictionary();
+  } catch (error) {
+    console.warn(error);
+    renderLiveCaloriesEmpty(
+      "Stima kcal live non disponibile.",
+      "Non e' stato possibile caricare lo storico personale dei pasti."
+    );
+    return;
+  }
+
+  const today = new Date();
+  const todayRow = dati.find(row => {
+    const rowDate = parseDashboardDate(row.data);
+    return rowDate && window.liveCaloriesUtils.isSameDay(rowDate, today);
+  });
+
+  if (!todayRow) {
+    renderLiveCaloriesEmpty("Nessun dato alimentare registrato oggi.");
+    return;
+  }
+
+  const meals = [
+    todayRow.colazione,
+    todayRow.snackMattutino,
+    todayRow.pranzo,
+    todayRow.snackPomeridiano,
+    todayRow.cena,
+    todayRow.snackSerale
+  ].filter(value => String(value || "").trim());
+
+  if (meals.length === 0) {
+    renderLiveCaloriesEmpty("Nessun pasto inserito oggi.");
+    return;
+  }
+
+  const result = window.liveCaloriesUtils.estimateTodayCalories(todayRow, dictionary);
+
+  if (result.matched.length === 0) {
+    renderLiveCaloriesEmpty(
+      "Stima non disponibile: nessun alimento riconosciuto nello storico.",
+      "Completa i pasti di oggi o arricchisci lo storico per ottenere una stima piu' affidabile."
+    );
+    return;
+  }
+
+  renderLiveCaloriesCard(result, DAILY_KCAL_TARGET);
+}
 
 // === FETCH DATI DAL GOOGLE SHEET ===
 async function caricaDati() {
@@ -72,6 +333,7 @@ async function caricaDati() {
   document.getElementById("last-update").textContent =
     datiTotali[datiTotali.length - 1].data;
 
+  await aggiornaStimaLiveOggi(datiTotali);
   impostaPeriodoDefault();
 } // Fine caricaDati
 
@@ -338,7 +600,6 @@ function aggiornaGraficoKcal(dati, mode = "default") {
   if (mode === "default") {
     const labels = dati.map(d => d.data);
     const kcal = dati.map(d => d.kcal);
-    const fabbisognoMedio = 1900;
 
     // Colori weekend
     const backgroundColors = dati.map(d => {
@@ -372,14 +633,14 @@ function aggiornaGraficoKcal(dati, mode = "default") {
             annotations: {
               fabbisogno: {
                 type: 'line',
-                yMin: fabbisognoMedio,
-                yMax: fabbisognoMedio,
+                yMin: DAILY_KCAL_TARGET,
+                yMax: DAILY_KCAL_TARGET,
                 borderColor: 'rgba(220,38,38,0.8)',
                 borderWidth: 2,
                 borderDash: [6, 6],
                 label: {
                   enabled: true,
-                  content: `Fabbisogno medio ${fabbisognoMedio} kcal`,
+                  content: `Fabbisogno medio ${DAILY_KCAL_TARGET} kcal`,
                   position: 'end',
                   color: '#dc2626',
                   backgroundColor: 'rgba(220,38,38,0.1)',
@@ -394,12 +655,12 @@ function aggiornaGraficoKcal(dati, mode = "default") {
     // Aggiorna saldo calorico sotto al grafico
     const kcalValidi = kcal.filter(Boolean);
     const mediaKcalPeriodo = kcalValidi.reduce((a,b)=>a+b,0) / kcalValidi.length;
-    const differenza = mediaKcalPeriodo - fabbisognoMedio;
+    const differenza = mediaKcalPeriodo - DAILY_KCAL_TARGET;
     const saldoEl = document.getElementById("saldoKcal");
 
     if (!isNaN(differenza)) {
       let messaggio, colore;
-      if (Math.abs(differenza) < 50) {
+      if (Math.abs(differenza) < DAILY_KCAL_TARGET_TOLERANCE) {
         messaggio = `⚖️ Bilanciato – apporto medio vicino al fabbisogno (${mediaKcalPeriodo.toFixed(0)} kcal)`;
         colore = "text-blue-600";
       } else if (differenza < 0) {
@@ -698,80 +959,6 @@ function aggiornaGraficoPassi(dati, mode = "default") {
       document.getElementById("riepilogoAttivita").textContent =
         `${emoji} Media ${media.toFixed(0)} kcal/giorno — livello ${livello}`;
     }
-
-  /*
-  if (mode === "attivita") {
-
-    // Livelli di attività predefiniti, per il grafico
-    const livelloAlto = 500;
-    const livelloMedio = 250;
-
-    const labels = dati.map(d => d.data);
-    const kcal = dati.map(d => d.kcalConsumate || 0);
-    const kcalCumulative = kcal.map((v,i) => kcal.slice(0,i+1).reduce((a,b)=>a+b,0));
-
-    // Definizione soglie e colori
-    const backgroundColors = kcal.map(v => {
-      if (v >= livelloAlto) return "rgba(34,197,94,0.8)";   // verde - alta attività
-      if (v >= livelloMedio) return "rgba(234,179,8,0.8)";   // giallo - moderata
-      return "rgba(239,68,68,0.8)";                 // rosso - bassa
-    });
-
-    chartPassi = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels,
-        datasets: [{
-          label: "Kcal consumate",
-          data: kcal,
-          backgroundColor: backgroundColors,
-          borderColor: "#fff",
-          borderWidth: 1,
-        },
-        {
-          label: "Kcal cumulative",
-          data: kcalCumulative,
-          type: "line",
-          borderColor: "#2563eb",
-          borderWidth: 2,
-          pointRadius: 0,
-          tension: 0.3,
-          yAxisID: "y",
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: { display: true, text: "Kcal consumate" }
-          }
-        },
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.parsed.y.toFixed(0)} kcal`
-            }
-          }
-        }
-      }
-    });
-
-    // === Riepilogo sintetico ===
-    const media = kcal.filter(Boolean).reduce((a,b)=>a+b,0) / kcal.filter(Boolean).length;
-    let livello, colore, emoji;
-    if (media >= livelloAlto) { livello = "Alta attività"; colore = "text-green-600"; emoji = "💪"; }
-    else if (media >= livelloMedio) { livello = "Moderata"; colore = "text-yellow-600"; emoji = "🏃"; }
-    else { livello = "Bassa"; colore = "text-red-600"; emoji = "🛋"; }
-
-    document.getElementById("riepilogoAttivita").className = `mt-3 text-center text-sm font-semibold ${colore}`;
-    document.getElementById("riepilogoAttivita").textContent =
-      `${emoji} Media ${media.toFixed(0)} kcal/giorno — livello ${livello}`;
-  }
-  */
-
-
 }
 
 
