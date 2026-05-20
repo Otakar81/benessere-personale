@@ -1,0 +1,1016 @@
+{
+  "una banana": {
+    "kcal": 107,
+    "samples": 20,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "5 mandorle": {
+    "kcal": 35,
+    "samples": 19,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "yogurt con cereali": {
+    "kcal": 197,
+    "samples": 16,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "cappuccino e 8 biscotti": {
+    "kcal": 421,
+    "samples": 16,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "cappuccino e cornetto alla crema": {
+    "kcal": 459,
+    "samples": 13,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "yogurt proteico con muesli e frutta 160kcal": {
+    "kcal": 160,
+    "samples": 11,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "cappuccino e 6 biscotti": {
+    "kcal": 347,
+    "samples": 11,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "un cioccolatino": {
+    "kcal": 70,
+    "samples": 10,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "cappuccino 4 fette biscottate integrali con nutella": {
+    "kcal": 402,
+    "samples": 10,
+    "confidence": "alta",
+    "source": "historical"
+  },
+  "cappuccino e 4 fette biscottate con nutella": {
+    "kcal": 468,
+    "samples": 9,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "6 mandorle": {
+    "kcal": 43,
+    "samples": 8,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "cappuccino e una fetta di crostata": {
+    "kcal": 480,
+    "samples": 7,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "barretta proteica 135kcal": {
+    "kcal": 135,
+    "samples": 7,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "una carota": {
+    "kcal": 25,
+    "samples": 6,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "latte e cereali": {
+    "kcal": 248,
+    "samples": 6,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "cappuccino e una fetta di ciambellone": {
+    "kcal": 438,
+    "samples": 6,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "cappuccino e 5 biscotti": {
+    "kcal": 315,
+    "samples": 6,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "una banana 5 mandorle": {
+    "kcal": 132,
+    "samples": 5,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "shaker proteico 123kcal": {
+    "kcal": 123,
+    "samples": 5,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "granola fitness 175kcal": {
+    "kcal": 175,
+    "samples": 5,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "fetta al latte": {
+    "kcal": 118,
+    "samples": 5,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "cappuccino e 40g di panettone": {
+    "kcal": 234,
+    "samples": 5,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "barretta proteica 138kcal": {
+    "kcal": 138,
+    "samples": 5,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "4 fette biscottate con marmellata": {
+    "kcal": 272,
+    "samples": 5,
+    "confidence": "media",
+    "source": "historical"
+  },
+  "un biscotto": {
+    "kcal": 45,
+    "samples": 4,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e una fetta di torta alla carota": {
+    "kcal": 448,
+    "samples": 4,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 8 biscotti pan di stelle": {
+    "kcal": 429,
+    "samples": 4,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 4 fette biscottate integrali con nutella": {
+    "kcal": 382,
+    "samples": 4,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 4 fette biscottate": {
+    "kcal": 258,
+    "samples": 4,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt proteico con muesli e frutta 180kcal": {
+    "kcal": 180,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt proteico con muesli e frutta 160kcal 5 nocciole": {
+    "kcal": 194,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt e cereali": {
+    "kcal": 220,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt con cereali un pocket coffee": {
+    "kcal": 235,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt activia e banana": {
+    "kcal": 203,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt": {
+    "kcal": 100,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una mela 5 mandorle": {
+    "kcal": 127,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una fetta di colomba": {
+    "kcal": 360,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una banana un pocket coffee": {
+    "kcal": 162,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una banana un cioccolatino": {
+    "kcal": 175,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "toast con lonza": {
+    "kcal": 228,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pane integrale 40g con salame": {
+    "kcal": 223,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pane integrale 20g con due fette di crudo": {
+    "kcal": 122,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "mela con 25g di parmigiano": {
+    "kcal": 192,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "due ciambelline al vino": {
+    "kcal": 283,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e una fetta di crostata alla marmellata": {
+    "kcal": 430,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e cornetto con goccie di cioccolato": {
+    "kcal": 467,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e cornetto alla marmellata": {
+    "kcal": 423,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 7 biscotti": {
+    "kcal": 363,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "barretta proteica 140kcal": {
+    "kcal": 140,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "4 mandorle e nocciole": {
+    "kcal": 47,
+    "samples": 3,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt proteico con granola 160kcal": {
+    "kcal": 160,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "yogurt bianco con cereali": {
+    "kcal": 162,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "uno yogurt": {
+    "kcal": 110,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una piccola fetta di pan di spagna": {
+    "kcal": 160,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una piccola fetta di ciambellone": {
+    "kcal": 225,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una patata media fagioli 100g una carota": {
+    "kcal": 278,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una mela e del parmigiano": {
+    "kcal": 200,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una mela e 20g di pecorino": {
+    "kcal": 170,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una mela": {
+    "kcal": 92,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una fetta di torta alla carota": {
+    "kcal": 350,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una fetta di pizza margherita": {
+    "kcal": 320,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una fetta di ciambellone": {
+    "kcal": 290,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una carota con maionese": {
+    "kcal": 130,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una banana e qualche mandorla": {
+    "kcal": 202,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "una banana 4 mandorle": {
+    "kcal": 135,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "un pezzetto piccolo di ciambellone": {
+    "kcal": 165,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "shaker proteico 123kcal e un cioccolatino 20g pane integrale con 10g di lombo": {
+    "kcal": 247,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "shaker proteico 123kcal e un cioccolatino": {
+    "kcal": 193,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "risotto alla zucca": {
+    "kcal": 475,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "qualche grissino alla carota": {
+    "kcal": 100,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "primo e contorno": {
+    "kcal": 550,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pesce al forno insalata e 60g di pane integrale": {
+    "kcal": 432,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pasta 80g con salmone e zucchine un cioccolatino": {
+    "kcal": 680,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pane integrale 40g con due fette di crudo 10g di cioccolata fondente": {
+    "kcal": 255,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pane integrale 30g salamino secco 30g": {
+    "kcal": 208,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pane integrale 20g due fette di crudo": {
+    "kcal": 129,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pane integrale 20g con due fette di lonza": {
+    "kcal": 85,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "pane integrale 10g con una fetta di crudo": {
+    "kcal": 85,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "mezzo toast con crudo": {
+    "kcal": 132,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "metto toast con bresaola un cioccolatino": {
+    "kcal": 322,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "merendina pan di stelle": {
+    "kcal": 152,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "menu medio wopper patate fritte fanta": {
+    "kcal": 1120,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "lenticchie e crostini di pane": {
+    "kcal": 435,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "latte e biscotti": {
+    "kcal": 350,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "fettuccine al ragu": {
+    "kcal": 525,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "dessert proteico 150kcal": {
+    "kcal": 150,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e una fetta di torta alle mandorle": {
+    "kcal": 515,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e una fetta di colomba": {
+    "kcal": 390,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e una fetta di ciambellone con goccie di cioccolato": {
+    "kcal": 440,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e saccottino con gocce di cioccolato": {
+    "kcal": 485,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e cornetto semplice": {
+    "kcal": 425,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e cornetto con gocce di cioccolato": {
+    "kcal": 480,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e cornetto alla nutella": {
+    "kcal": 535,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e cornetto al cioccolato": {
+    "kcal": 455,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e biscotti": {
+    "kcal": 340,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 6 biscotti pan di stelle": {
+    "kcal": 370,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 45g di pandoro": {
+    "kcal": 288,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 4 fette biscottate integrali con un po di nutella": {
+    "kcal": 335,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino e 4 biscotti": {
+    "kcal": 275,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino 3 biscotti un plumcake": {
+    "kcal": 402,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino 3 biscotti un piccolo muffin": {
+    "kcal": 468,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino 2 biscotti un plumcake": {
+    "kcal": 375,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "barretta proteica 170kcal": {
+    "kcal": 170,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "barretta proteica 138kcal crekers di legumi": {
+    "kcal": 248,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "8 mandorle e nocciole": {
+    "kcal": 90,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "8 mandorle": {
+    "kcal": 60,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "4 fette biscottate con nutella": {
+    "kcal": 370,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "2 ciambelline al vino": {
+    "kcal": 205,
+    "samples": 2,
+    "confidence": "bassa",
+    "source": "historical"
+  },
+  "cappuccino": {
+    "kcal": 120,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "fanta": {
+    "kcal": 160,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "latte": {
+    "kcal": 120,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "un pocket coffee": {
+    "kcal": 55,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "insalata": {
+    "kcal": 20,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "una patata media": {
+    "kcal": 110,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "4 mandorle": {
+    "kcal": 28,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "5 nocciole": {
+    "kcal": 35,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "nocciole": {
+    "kcal": 50,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "qualche mandorla": {
+    "kcal": 35,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "20g di pecorino": {
+    "kcal": 80,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "25g di parmigiano": {
+    "kcal": 100,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "yogurt bianco": {
+    "kcal": 100,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "yogurt activia": {
+    "kcal": 100,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "2 biscotti": {
+    "kcal": 90,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "3 biscotti": {
+    "kcal": 135,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "4 biscotti": {
+    "kcal": 180,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "5 biscotti": {
+    "kcal": 225,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "6 biscotti": {
+    "kcal": 270,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "7 biscotti": {
+    "kcal": 315,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "8 biscotti": {
+    "kcal": 360,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "6 biscotti pan di stelle": {
+    "kcal": 240,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "8 biscotti pan di stelle": {
+    "kcal": 320,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "4 fette biscottate": {
+    "kcal": 120,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "4 fette biscottate integrali con nutella": {
+    "kcal": 280,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "4 fette biscottate integrali con un po di nutella": {
+    "kcal": 200,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "cereali": {
+    "kcal": 120,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "cornetto al cioccolato": {
+    "kcal": 300,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "cornetto alla crema": {
+    "kcal": 280,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "cornetto alla marmellata": {
+    "kcal": 260,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "cornetto alla nutella": {
+    "kcal": 350,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "cornetto con gocce di cioccolato": {
+    "kcal": 300,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "cornetto semplice": {
+    "kcal": 220,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "saccottino con gocce di cioccolato": {
+    "kcal": 320,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "un piccolo muffin": {
+    "kcal": 200,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "un plumcake": {
+    "kcal": 160,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "10g di cioccolata fondente": {
+    "kcal": 55,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "40g di panettone": {
+    "kcal": 145,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "45g di pandoro": {
+    "kcal": 175,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "una fetta di ciambellone con gocce di cioccolato": {
+    "kcal": 320,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "una fetta di crostata": {
+    "kcal": 350,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "una fetta di crostata alla marmellata": {
+    "kcal": 350,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "una fetta di torta alle mandorle": {
+    "kcal": 400,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "menu medio wopper": {
+    "kcal": 1000,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "patate fritte": {
+    "kcal": 300,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "60g di pane integrale": {
+    "kcal": 150,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "crekers di legumi": {
+    "kcal": 110,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "crostini di pane": {
+    "kcal": 100,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "pane integrale 20g": {
+    "kcal": 50,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "pane integrale 30g": {
+    "kcal": 75,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "20g pane integrale con 10g di lombo": {
+    "kcal": 70,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "fagioli 100g": {
+    "kcal": 80,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "lenticchie": {
+    "kcal": 200,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "mezzo toast con bresaola": {
+    "kcal": 120,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "pane integrale 40g con due fette di crudo": {
+    "kcal": 200,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "pasta 80g con salmone e zucchine": {
+    "kcal": 500,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "pesce al forno": {
+    "kcal": 250,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "salamino secco 30g": {
+    "kcal": 120,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "insalata con pomodori": {
+    "kcal": 130,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "tonno 60g": {
+    "kcal": 115,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "spremuta di arance": {
+    "kcal": 90,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  }
+}
