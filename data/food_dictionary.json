@@ -1012,5 +1012,17 @@
     "samples": 1,
     "confidence": "bassa",
     "source": "derived"
+  },
+  "yogurt greco 150g con granola": {
+    "kcal": 190,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
+  },
+  "yogurt greco 150g con fragole": {
+    "kcal": 150,
+    "samples": 1,
+    "confidence": "bassa",
+    "source": "derived"
   }
 }
