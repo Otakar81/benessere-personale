@@ -3,14 +3,15 @@
 // Aggiornato per refresh immediato e cache controllata
 // ==========================
 
-const CACHE_NAME = "benessere-personale-cache-v11"; // cambiare questo valore a ogni rilascio
+const CACHE_NAME = "benessere-personale-cache-v12"; // cambiare questo valore a ogni rilascio
 const URLS_TO_CACHE = [
   "./",
   "index.html",
   "manifest.json",
   "icon-192.png",
   "icon-512.png",
-  // Aggiungi qui eventuali file CSS/JS principali
+  "js/dashboard.js",
+  "js/live-calories-utils.js"
 ];
 
 // Installazione – prepara la nuova cache
@@ -36,6 +37,13 @@ self.addEventListener("activate", (event) => {
 
 // Fetch – usa la cache, poi fallback a rete
 self.addEventListener("fetch", (event) => {
+  const url = new URL(event.request.url);
+
+  if (url.pathname.endsWith("/data/food_dictionary.json") || url.pathname.endsWith("/food_dictionary.json")) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }));
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       // Se presente in cache, restituiscilo; altrimenti prendi da rete
