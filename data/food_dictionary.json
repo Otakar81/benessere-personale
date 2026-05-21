@@ -2848,5 +2848,17 @@
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction"
+  },
+  "macinato 50g": {
+    "kcal": 110,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction"
+  },
+  "guanciale 4 cubetti": {
+    "kcal": 120,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction"
   }
 }
