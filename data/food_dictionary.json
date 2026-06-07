@@ -74,7 +74,7 @@
   "barretta proteica 135kcal": {
     "kcal": 135,
     "samples": 8,
-    "confidence": "media",
+    "confidence": "alta",
     "source": "historical"
   },
   "una carota": {
@@ -109,14 +109,14 @@
   },
   "shaker proteico 123kcal": {
     "kcal": 123,
-    "samples": 6,
-    "confidence": "media",
+    "samples": 7,
+    "confidence": "alta",
     "source": "historical"
   },
   "granola fitness 175kcal": {
     "kcal": 175,
-    "samples": 6,
-    "confidence": "media",
+    "samples": 7,
+    "confidence": "alta",
     "source": "historical"
   },
   "fetta al latte": {
@@ -134,12 +134,12 @@
   "barretta proteica 138kcal": {
     "kcal": 138,
     "samples": 6,
-    "confidence": "media",
+    "confidence": "alta",
     "source": "historical"
   },
   "4 fette biscottate con marmellata": {
-    "kcal": 272,
-    "samples": 5,
+    "kcal": 273,
+    "samples": 6,
     "confidence": "media",
     "source": "historical"
   },
@@ -176,13 +176,13 @@
   "yogurt proteico con muesli e frutta 180kcal": {
     "kcal": 180,
     "samples": 3,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "historical"
   },
   "yogurt proteico con muesli e frutta 160kcal 5 nocciole": {
     "kcal": 194,
     "samples": 3,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "historical"
   },
   "yogurt e cereali": {
@@ -290,7 +290,7 @@
   "barretta proteica 140kcal": {
     "kcal": 140,
     "samples": 5,
-    "confidence": "media",
+    "confidence": "alta",
     "source": "historical"
   },
   "4 mandorle e nocciole": {
@@ -301,8 +301,8 @@
   },
   "yogurt proteico con granola 160kcal": {
     "kcal": 160,
-    "samples": 4,
-    "confidence": "bassa",
+    "samples": 5,
+    "confidence": "alta",
     "source": "historical"
   },
   "yogurt bianco con cereali": {
@@ -398,13 +398,13 @@
   "shaker proteico 123kcal e un cioccolatino 20g pane integrale con 10g di lombo": {
     "kcal": 247,
     "samples": 2,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "historical"
   },
   "shaker proteico 123kcal e un cioccolatino": {
     "kcal": 193,
     "samples": 2,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "historical"
   },
   "risotto alla zucca": {
@@ -512,7 +512,7 @@
   "dessert proteico 150kcal": {
     "kcal": 150,
     "samples": 4,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "historical"
   },
   "cappuccino e una fetta di torta alle mandorle": {
@@ -613,14 +613,14 @@
   },
   "barretta proteica 170kcal": {
     "kcal": 170,
-    "samples": 3,
-    "confidence": "bassa",
+    "samples": 4,
+    "confidence": "alta",
     "source": "historical"
   },
   "barretta proteica 138kcal crekers di legumi": {
     "kcal": 248,
     "samples": 2,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "historical"
   },
   "8 mandorle e nocciole": {
@@ -648,8 +648,8 @@
     "source": "historical"
   },
   "cappuccino": {
-    "kcal": 100,
-    "samples": 2,
+    "kcal": 107,
+    "samples": 3,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -673,7 +673,7 @@
   },
   "insalata": {
     "kcal": 20,
-    "samples": 2,
+    "samples": 3,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -709,7 +709,7 @@
   },
   "20g di pecorino": {
     "kcal": 80,
-    "samples": 1,
+    "samples": 2,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -732,8 +732,8 @@
     "source": "derived"
   },
   "2 biscotti": {
-    "kcal": 90,
-    "samples": 1,
+    "kcal": 95,
+    "samples": 2,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -756,8 +756,8 @@
     "source": "derived"
   },
   "6 biscotti": {
-    "kcal": 270,
-    "samples": 1,
+    "kcal": 285,
+    "samples": 2,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -768,8 +768,8 @@
     "source": "derived"
   },
   "8 biscotti": {
-    "kcal": 340,
-    "samples": 2,
+    "kcal": 360,
+    "samples": 3,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -943,7 +943,7 @@
   },
   "pane integrale 30g": {
     "kcal": 75,
-    "samples": 2,
+    "samples": 3,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -954,8 +954,8 @@
     "source": "derived"
   },
   "fagioli 100g": {
-    "kcal": 80,
-    "samples": 1,
+    "kcal": 90,
+    "samples": 2,
     "confidence": "bassa",
     "source": "derived"
   },
@@ -1027,222 +1027,255 @@
   },
   "barretta proteica 125kcal": {
     "kcal": 125,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "barretta proteica 136kcal": {
     "kcal": 136,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "barretta proteica 150kcal": {
     "kcal": 150,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "dessert proteico 168kcal": {
     "kcal": 168,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "granola fitness 135kcal": {
     "kcal": 135,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merendina pan di stelle 130kcal": {
     "kcal": 130,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "snack al parmigiano 190kcal": {
     "kcal": 190,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "crackers galbusera con farine di legumi 160kcal": {
     "kcal": 160,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "yogurt proteico 180kcal": {
     "kcal": 180,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "yogurt proteico 190kcal": {
     "kcal": 190,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "yogurt proteico con muesli 160kcal": {
     "kcal": 160,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "yogurt proteico con muesli 180kcal": {
     "kcal": 180,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 10g": {
     "kcal": 27,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 20g": {
     "kcal": 54,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 30g": {
     "kcal": 81,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 40g": {
     "kcal": 108,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 50g": {
     "kcal": 135,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 60g": {
     "kcal": 162,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 70g": {
-    "kcal": 187,
+    "kcal": 188,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
-    "samples": 2
+    "samples": 3
   },
   "pane 80g": {
     "kcal": 216,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 100g": {
     "kcal": 270,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane 180g": {
     "kcal": 486,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 10g": {
     "kcal": 25,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 25g": {
     "kcal": 62,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 35g": {
     "kcal": 88,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 40g": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
-    "samples": 2
+    "samples": 3
   },
   "pane integrale 45g": {
     "kcal": 112,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 50g": {
     "kcal": 125,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 60g": {
     "kcal": 150,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
-    "samples": 2
+    "samples": 3
   },
   "pane integrale 70g": {
     "kcal": 175,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 80g": {
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "pane integrale 90g": {
     "kcal": 225,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 100g": {
     "kcal": 250,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pane integrale 180g": {
     "kcal": 450,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "focaccia 100g": {
     "kcal": 300,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "focaccia 130g": {
     "kcal": 390,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "focaccia 180g": {
     "kcal": 530,
@@ -1255,374 +1288,435 @@
     "kcal": 210,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "focaccia bianca 80g": {
     "kcal": 240,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "focaccia bianca 100g": {
     "kcal": 300,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "focaccia bianca 130g": {
     "kcal": 390,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pizza rossa 130g": {
     "kcal": 325,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pizza rossa 150g": {
     "kcal": 375,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pizza rossa 180g": {
     "kcal": 450,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 60g": {
     "kcal": 216,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 70g": {
     "kcal": 249,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
-    "samples": 2
+    "samples": 3
   },
   "pasta 75g": {
     "kcal": 270,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 80g": {
     "kcal": 288,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 85g": {
     "kcal": 306,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 90g": {
     "kcal": 324,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 100g": {
     "kcal": 360,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 120g": {
     "kcal": 432,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 150g": {
     "kcal": 540,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "spaghetti 80g": {
     "kcal": 288,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "spaghetti 85g": {
     "kcal": 306,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "spaghetti 90g": {
     "kcal": 324,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pastina 50g": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "riso 60g": {
-    "kcal": 216,
+    "kcal": 213,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "riso 70g": {
-    "kcal": 252,
+    "kcal": 249,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "riso 75g": {
     "kcal": 270,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "riso 80g": {
     "kcal": 288,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "riso integrale 60g": {
     "kcal": 210,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "riso integrale 70g": {
     "kcal": 245,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "riso integrale 80g": {
     "kcal": 280,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "riso in bianco 70g": {
     "kcal": 91,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "risotto integrale 70g": {
     "kcal": 105,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "cous cous 60g": {
     "kcal": 216,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mix di legumi e cereali 70g": {
     "kcal": 238,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pandoro 30g": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pandoro 50g": {
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pandoro 60g": {
     "kcal": 240,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pandoro 70g": {
     "kcal": 280,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "panettone 40g": {
     "kcal": 144,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "panettone 80g": {
     "kcal": 288,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mais tostato 20g": {
     "kcal": 76,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mais tostato 40g": {
     "kcal": 152,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "snack vegetale 30g": {
     "kcal": 135,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "snack triangoli di mais e legumi 20g": {
     "kcal": 90,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "patatine pringles 70g": {
     "kcal": 364,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "alghe panate 40g": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "parmigiano 15g": {
     "kcal": 60,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "parmigiano 20g": {
     "kcal": 80,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "parmigiano 25g": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "parmigiano 30g": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pecorino 10g": {
     "kcal": 39,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pecorino 15g": {
     "kcal": 58,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pecorino 20g": {
     "kcal": 78,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pecorino 25g": {
     "kcal": 98,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pecorino 30g": {
     "kcal": 117,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "caciottina 10g": {
     "kcal": 35,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "caciottina 20g": {
     "kcal": 70,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "caciottina 30g": {
     "kcal": 105,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "philadelphia 30g": {
     "kcal": 75,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "philadelphia 50g": {
     "kcal": 125,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "robiola 25g": {
     "kcal": 78,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "ricotta 50g": {
     "kcal": 80,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "ricotta 100g": {
     "kcal": 160,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "ricotta di bufala 100g": {
     "kcal": 210,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "burrata 125g": {
     "kcal": 412,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mozzarella di bufala 100g": {
     "kcal": 275,
@@ -1635,260 +1729,302 @@
     "kcal": 324,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mozzarella di bufala 125g": {
     "kcal": 338,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mozzarella di bufala 150g": {
     "kcal": 405,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "jocca 175g": {
     "kcal": 175,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "stracchino 15g": {
     "kcal": 45,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salame 10g": {
     "kcal": 43,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salame 20g": {
     "kcal": 86,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salame 30g": {
     "kcal": 129,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salame 35g": {
     "kcal": 150,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salame 45g": {
     "kcal": 194,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "prosciutto crudo 30g": {
     "kcal": 81,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "prosciutto crudo 60g": {
     "kcal": 162,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mortadella 50g": {
     "kcal": 160,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mortadella 60g": {
     "kcal": 192,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mortadella 75g": {
     "kcal": 240,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mortadella 80g": {
     "kcal": 256,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "porchetta 30g": {
     "kcal": 126,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "porchetta 100g": {
     "kcal": 420,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bresaola 20g": {
     "kcal": 30,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "lombo 10g": {
     "kcal": 13,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "lombo 15g": {
     "kcal": 20,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "lonza 10g": {
     "kcal": 13,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "lonza 15g": {
     "kcal": 20,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "lonzino 10g": {
     "kcal": 13,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pancetta 50g": {
     "kcal": 230,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pancetta 80g": {
     "kcal": 368,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "guanciale 20g": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "macinato 70g": {
     "kcal": 175,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pollo 100g": {
     "kcal": 165,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pollo 140g": {
     "kcal": 231,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pollo 170g": {
     "kcal": 280,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pollo 180g": {
     "kcal": 297,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pollo 200g": {
     "kcal": 330,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pollo alla griglia 200g": {
     "kcal": 330,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "hamburger 180g": {
     "kcal": 450,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
-    "samples": 2
+    "samples": 3
   },
   "hamburger 190g": {
     "kcal": 475,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "hamburger 200g": {
     "kcal": 500,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bistecca 100g": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bistecca 120g": {
     "kcal": 264,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bistecca 130g": {
     "kcal": 286,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bistecca danese 120g": {
     "kcal": 276,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bistecca danese 220g": {
     "kcal": 506,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "arista di maiale 100g": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "arista di maiale 150g": {
     "kcal": 315,
@@ -1901,43 +2037,50 @@
     "kcal": 396,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "arista maiale 180g": {
     "kcal": 396,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pulled pork 250g": {
     "kcal": 625,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "costine di maiale 180g": {
     "kcal": 630,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "spezzatino di manzo 100g": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "straccetti di manzo 150g": {
     "kcal": 300,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salmone 50g": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salmone 80g": {
     "kcal": 163,
@@ -1950,217 +2093,253 @@
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salmone 125g": {
     "kcal": 250,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salmone affumicato 50g": {
     "kcal": 90,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salmone affumicato 75g": {
     "kcal": 135,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salmone affumicato 80g": {
     "kcal": 144,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "tonno 20g": {
     "kcal": 24,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "tonno 80g": {
     "kcal": 96,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "tonno 140g": {
     "kcal": 168,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo 100g": {
     "kcal": 80,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo 125g": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo 200g": {
     "kcal": 160,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo panato 90g": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo panato 120g": {
     "kcal": 240,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo panato 200g": {
     "kcal": 400,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo panato al forno 100g": {
     "kcal": 190,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "merluzzo panato al forno 120g": {
     "kcal": 228,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "crocchette di merluzzo 120g": {
     "kcal": 228,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "crocchette di merluzzo 150g": {
     "kcal": 285,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "crocchette di pollo 140g": {
     "kcal": 322,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "scaloppine di pollo 150g": {
     "kcal": 285,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "polpette di manzo 170g": {
     "kcal": 425,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "polpette vegetariane ceci e verdure 250g": {
     "kcal": 400,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "falafel al forno 100g": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "gyoza maiale e verdure 200g": {
     "kcal": 440,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "burger di pesce 115g": {
     "kcal": 207,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "involtini di pollo 200g": {
     "kcal": 400,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "gamberi 70g": {
     "kcal": 60,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "latte 150ml": {
     "kcal": 75,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "latte di soia 150ml": {
     "kcal": 50,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "birra 0.2l": {
     "kcal": 86,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "birra 0.3l": {
     "kcal": 129,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "birra 0.4l": {
     "kcal": 172,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "birra 0.5l": {
     "kcal": 215,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "birra 33cl": {
     "kcal": 142,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 bicchiere di latte": {
     "kcal": 75,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 spremuta di arancia": {
-    "kcal": 100,
+    "kcal": 105,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "caffè": {
     "kcal": 5,
@@ -2173,99 +2352,113 @@
     "kcal": 80,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "fanta zero": {
     "kcal": 0,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 banana": {
     "kcal": 105,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezza banana": {
     "kcal": 55,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 mela": {
-    "kcal": 85,
+    "kcal": 83,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
-    "samples": 2
+    "samples": 3
   },
   "1 pera": {
     "kcal": 90,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 piccole pere": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 cachi": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 cachi": {
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 mandarino": {
     "kcal": 45,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 carota": {
     "kcal": 25,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 patata media": {
-    "kcal": 120,
-    "confidence": "bassa",
-    "source": "derived",
-    "origin": "historical_singleton_extraction"
-  },
-  "1 uovo": {
-    "kcal": 75,
-    "confidence": "bassa",
-    "source": "derived",
-    "origin": "historical_singleton_extraction"
-  },
-  "1 uovo sodo": {
-    "kcal": 75,
-    "confidence": "bassa",
-    "source": "derived",
-    "origin": "historical_singleton_extraction"
-  },
-  "2 uova": {
-    "kcal": 150,
+    "kcal": 135,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
     "samples": 2
   },
+  "1 uovo": {
+    "kcal": 78,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 2
+  },
+  "1 uovo sodo": {
+    "kcal": 75,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "2 uova": {
+    "kcal": 153,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 3
+  },
   "2 uova sode": {
     "kcal": 150,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 biscotto": {
     "kcal": 43,
@@ -2278,7 +2471,8 @@
     "kcal": 450,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 cioccolatino": {
     "kcal": 60,
@@ -2291,115 +2485,134 @@
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "3 cioccolatini": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "5 cioccolatini": {
     "kcal": 300,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 pocket coffee": {
     "kcal": 55,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 twix": {
     "kcal": 250,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 wafer": {
     "kcal": 60,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 wafer": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 bignè": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 piccolo muffin": {
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 plumcake": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 merendina": {
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 piccola merendina": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo kinder bueno": {
     "kcal": 115,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 cucchiaino di nutella": {
-    "kcal": 30,
+    "kcal": 55,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "2 cucchiaini di nutella": {
     "kcal": 60,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo cucchiaino di nutella": {
     "kcal": 15,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 cucchiaio di nutella": {
     "kcal": 90,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo pancake alla nutella": {
     "kcal": 250,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 crostatina al cioccolato": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di ciambellone": {
     "kcal": 270,
@@ -2412,7 +2625,8 @@
     "kcal": 360,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di crostata": {
     "kcal": 365,
@@ -2425,13 +2639,15 @@
     "kcal": 400,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di crostata alla ricotta": {
     "kcal": 400,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di pandoro": {
     "kcal": 325,
@@ -2444,43 +2660,50 @@
     "kcal": 320,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezza fetta di panettone": {
     "kcal": 190,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di pan di spagna": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di torta caprese": {
     "kcal": 400,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di torta alla carota": {
     "kcal": 350,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di torta di mele": {
     "kcal": 320,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo cornetto alla crema": {
     "kcal": 160,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo cornetto alla marmellata": {
     "kcal": 135,
@@ -2493,37 +2716,43 @@
     "kcal": 70,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "4 fette biscottate integrali": {
     "kcal": 140,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "3 ciambelline al vino": {
     "kcal": 260,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "4 ciambelline al vino": {
     "kcal": 400,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 frappe": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "3 frappe": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "10 mandorle": {
     "kcal": 70,
@@ -2536,80 +2765,92 @@
     "kcal": 28,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 noci": {
-    "kcal": 90,
-    "confidence": "bassa",
-    "source": "derived",
-    "origin": "historical_singleton_extraction"
-  },
-  "4 noci": {
-    "kcal": 155,
+    "kcal": 75,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
     "samples": 2
   },
+  "4 noci": {
+    "kcal": 143,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 3
+  },
   "8 noci mandorle e nocciole": {
     "kcal": 170,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "4 polpette di merluzzo": {
     "kcal": 260,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 cosce di pollo": {
     "kcal": 360,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo toast": {
     "kcal": 130,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo toast con salame": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "toast con salame": {
     "kcal": 240,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo toast al tacchino e formaggio": {
     "kcal": 130,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "toast al tacchino e formaggio": {
     "kcal": 260,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "3 cucchiai di popcorn": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "4 fragole": {
     "kcal": 25,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "5 fragole": {
     "kcal": 25,
@@ -2622,7 +2863,8 @@
     "kcal": 35,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "5 fragole con zucchero": {
     "kcal": 58,
@@ -2632,503 +2874,864 @@
     "samples": 2
   },
   "zucchine": {
-    "kcal": 35,
-    "confidence": "bassa",
-    "source": "derived",
-    "origin": "historical_singleton_extraction",
-    "samples": 2
-  },
-  "pomodori": {
     "kcal": 33,
     "confidence": "bassa",
     "source": "derived",
     "origin": "historical_singleton_extraction",
-    "samples": 2
+    "samples": 3
   },
-  "pomodorini": {
-    "kcal": 35,
+  "pomodori": {
+    "kcal": 29,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 3
+  },
+  "pomodorini": {
+    "kcal": 28,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "broccoli": {
     "kcal": 70,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "broccolo": {
     "kcal": 70,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "zucca": {
     "kcal": 50,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "insalata mista": {
     "kcal": 35,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "spinaci": {
     "kcal": 45,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "rucola": {
     "kcal": 15,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "funghi": {
+    "kcal": 35,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 2
+  },
+  "carote": {
     "kcal": 40,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
-  },
-  "carote": {
-    "kcal": 50,
-    "confidence": "bassa",
-    "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "peperoni": {
-    "kcal": 50,
+    "kcal": 40,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "piselli": {
-    "kcal": 90,
+    "kcal": 85,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "ceci": {
     "kcal": 160,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "fagioli": {
     "kcal": 150,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bietole": {
     "kcal": 40,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "bietoline": {
     "kcal": 40,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "cipolla": {
     "kcal": 30,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "porro": {
     "kcal": 35,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "radicchio": {
     "kcal": 20,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "alici": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "patate al forno": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "minestra di verdure": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pastina con verdure": {
     "kcal": 250,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "fragole": {
-    "kcal": 35,
+    "kcal": 43,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "fragole con limone": {
     "kcal": 35,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "fragole con zucchero": {
     "kcal": 70,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "fragole e limone": {
     "kcal": 35,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "focaccia al pomodoro": {
     "kcal": 300,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "risotto ai funghi": {
     "kcal": 500,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "gnocchi 200g al pomodoro": {
     "kcal": 500,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "lasagna al pesto 150g": {
     "kcal": 520,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "zuppa di legumi 100g": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "amatriciana 120g": {
     "kcal": 700,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "crostatina alla marmellata": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "crostatina al cioccolato": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "macinato 50g": {
     "kcal": 110,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "guanciale 4 cubetti": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "yogurt proteico con fragole 140kcal": {
     "kcal": 140,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "4 felafel": {
     "kcal": 240,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pomodoro": {
     "kcal": 20,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "5 noci": {
-    "kcal": 160,
+    "kcal": 155,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "hamburger panato di pollo 280kcal": {
     "kcal": 280,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 piccola pera": {
     "kcal": 60,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "spremuta di arancia": {
-    "kcal": 90,
+    "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 2
   },
   "un cucchiaino di nutella": {
     "kcal": 55,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "4 pezzi di pizza al taglio": {
     "kcal": 900,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 tramezzino": {
     "kcal": 280,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 piccolo panino col salame": {
     "kcal": 280,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "piccola porzione di torta": {
     "kcal": 250,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "granola 40g": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 fette di salame": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "ketchup": {
     "kcal": 20,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "1 fetta di crudo": {
     "kcal": 45,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "120g pasta al ragù": {
     "kcal": 300,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "una tazza di cioccolata calda": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "sushi all you can eat": {
     "kcal": 1200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "una crostatina 190kcal": {
     "kcal": 190,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "3 fette di salame": {
     "kcal": 180,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "5 confetti con mandorla": {
     "kcal": 125,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "filetti di sgombro 100g": {
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pesce panato 100g": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "zucchine e pomodori": {
     "kcal": 55,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "ceci 125g": {
     "kcal": 150,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "carote e riso integrale 60g": {
     "kcal": 230,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "mezzo toast con una fetta di crudo": {
     "kcal": 140,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "30g pecorino": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "frullato di banana": {
     "kcal": 150,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "shacker proteico 40kcal": {
     "kcal": 40,
-    "confidence": "bassa",
+    "confidence": "alta",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "salmone 90g": {
     "kcal": 185,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pizza rossa 40g": {
     "kcal": 100,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pizza rossa 80g": {
     "kcal": 200,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "una fetta di salame": {
     "kcal": 60,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "polpette di merluzzo": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "6 fragole con zucchero": {
     "kcal": 60,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 fette biscottate con marmellata": {
     "kcal": 150,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "2 fette biscottate con nutella": {
     "kcal": 220,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "frullato di banana e fragola": {
     "kcal": 170,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pasta 70g con ragù": {
     "kcal": 330,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "10g di pecorino": {
     "kcal": 40,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "fiocchi di latte 75g": {
     "kcal": 75,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "pomodorini e rucola": {
     "kcal": 25,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   },
   "una mela con 10g di parmigiano": {
     "kcal": 120,
     "confidence": "bassa",
     "source": "derived",
-    "origin": "historical_singleton_extraction"
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "saccottino 190kcal": {
+    "kcal": 190,
+    "confidence": "alta",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "menù smash burger con patatine old wild west": {
+    "kcal": 1100,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "coca cola 0.3l": {
+    "kcal": 125,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "0.5 fette di cheesecake": {
+    "kcal": 200,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "1 manciata di arachidi": {
+    "kcal": 160,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "1 fetta di crostata alla marmellata": {
+    "kcal": 350,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "pasta 100g con sugo di polpette": {
+    "kcal": 550,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "polpettone 40g": {
+    "kcal": 90,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "1 fetta di melone": {
+    "kcal": 45,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "1 fetta di tiramisù": {
+    "kcal": 400,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "1 fetta di torta ricotta e pere": {
+    "kcal": 400,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "coca cola 0.5l": {
+    "kcal": 210,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "panino hot dog": {
+    "kcal": 400,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "petto di pollo 150g": {
+    "kcal": 165,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "mcdonald's menu large (panino, patatine fritte e sprite 0.5l)": {
+    "kcal": 1350,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "2 bocconcini di formaggio": {
+    "kcal": 140,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "3 noci": {
+    "kcal": 90,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "feta 100g": {
+    "kcal": 264,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "bruschetta pomodori 30g": {
+    "kcal": 80,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "nuggets di pollo 100g": {
+    "kcal": 290,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "mela": {
+    "kcal": 80,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "2 fette di crudo": {
+    "kcal": 70,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "cornetto con marmellata": {
+    "kcal": 300,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "crema di caffè": {
+    "kcal": 150,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "toast con 1 fetta di crudo": {
+    "kcal": 220,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "spezzatino di manzo 150g": {
+    "kcal": 250,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "baiocchi 144kcal": {
+    "kcal": 144,
+    "confidence": "alta",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "0.5 toast con 2 fette di crudo": {
+    "kcal": 130,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "nastrina 172kcal": {
+    "kcal": 172,
+    "confidence": "alta",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "toast con 2 fette di crudo": {
+    "kcal": 250,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "2 gamberi": {
+    "kcal": 30,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "20g di parmigiano": {
+    "kcal": 80,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "merluzzo al forno 200g 150kcal": {
+    "kcal": 150,
+    "confidence": "alta",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "2 carote": {
+    "kcal": 50,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "1 cucchiaino di maionese": {
+    "kcal": 45,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "2 fette di lonza": {
+    "kcal": 80,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "farina di ceci 80g": {
+    "kcal": 310,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "30g di olio": {
+    "kcal": 270,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "antipasto fritto": {
+    "kcal": 400,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
+  },
+  "1 pizza margherita": {
+    "kcal": 800,
+    "confidence": "bassa",
+    "source": "derived",
+    "origin": "historical_singleton_extraction",
+    "samples": 1
   }
 }
