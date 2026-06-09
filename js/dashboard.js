@@ -10,6 +10,12 @@ const FOOD_DICTIONARY_CACHE_BUSTER = "2026-05-20-1";
 let datiTotali = [];
 let chartPeso, chartKcal, chartPassi;
 let foodDictionary = null;
+let foodCostSearchResults = [];
+let liveCaloriesState = {
+  total: null,
+  target: DAILY_KCAL_TARGET,
+  hasTodayEstimate: false
+};
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -46,9 +52,270 @@ function parseDashboardDate(dateValue) {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
+function normalizeFoodSearchText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[.,;:!?()[\]{}"']/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function resetLiveCaloriesState() {
+  liveCaloriesState.total = null;
+  liveCaloriesState.hasTodayEstimate = false;
+}
+
+function setLiveCaloriesState(result) {
+  liveCaloriesState.total = Number(result?.total);
+  liveCaloriesState.hasTodayEstimate = Number.isFinite(liveCaloriesState.total);
+}
+
+function getFoodCostElements() {
+  return {
+    input: document.getElementById("foodCostSearch"),
+    clearButton: document.getElementById("foodCostClear"),
+    dropdown: document.getElementById("foodCostDropdown"),
+    results: document.getElementById("foodCostResults"),
+    simulation: document.getElementById("foodCostSimulation")
+  };
+}
+
+function setFoodCostDropdownVisible(isVisible) {
+  const { dropdown } = getFoodCostElements();
+  if (!dropdown) return;
+
+  dropdown.classList.toggle("hidden", !isVisible);
+}
+
+function updateFoodCostClearButton() {
+  const { input, clearButton } = getFoodCostElements();
+  if (!input || !clearButton) return;
+
+  clearButton.classList.toggle("hidden", input.value.length === 0);
+}
+
+function clearFoodCostDropdown() {
+  const { results, simulation } = getFoodCostElements();
+  foodCostSearchResults = [];
+
+  if (results) {
+    results.innerHTML = "";
+  }
+
+  if (simulation) {
+    simulation.innerHTML = "";
+    simulation.classList.add("hidden");
+  }
+
+  setFoodCostDropdownVisible(false);
+}
+
+function clearFoodCostSimulation() {
+  const { simulation } = getFoodCostElements();
+  if (simulation) {
+    simulation.innerHTML = "";
+    simulation.classList.add("hidden");
+  }
+}
+
+function renderFoodCostMessage(message, tone = "info") {
+  const { simulation } = getFoodCostElements();
+  if (!simulation) return;
+
+  const toneClass = tone === "danger"
+    ? "border-rose-200 bg-rose-50 text-rose-700"
+    : tone === "success"
+      ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+      : "border-slate-200 bg-slate-50 text-slate-600";
+
+  simulation.innerHTML = `
+    <div class="rounded-lg border px-3 py-2 ${toneClass}">
+      ${escapeHtml(message)}
+    </div>
+  `;
+  simulation.classList.remove("hidden");
+  setFoodCostDropdownVisible(true);
+}
+
+function findFoodCostMatches(query, dictionary, limit = 5) {
+  const normalizedQuery = normalizeFoodSearchText(query);
+  const queryWords = normalizedQuery.split(" ").filter(Boolean);
+
+  if (normalizedQuery.length < 2 || !dictionary || typeof dictionary !== "object") {
+    return [];
+  }
+
+  return Object.entries(dictionary)
+    .map(([name, entry]) => {
+      const kcal = Number(entry?.kcal);
+      const normalizedName = normalizeFoodSearchText(name);
+      const nameWords = normalizedName.split(" ").filter(Boolean);
+      const matchedWords = queryWords.filter(word =>
+        nameWords.some(nameWord => nameWord === word || nameWord.startsWith(word))
+      ).length;
+
+      let rank = 99;
+      if (normalizedName === normalizedQuery) {
+        rank = 0;
+      } else if (normalizedName.startsWith(normalizedQuery)) {
+        rank = 1;
+      } else if (normalizedName.includes(normalizedQuery)) {
+        rank = 2;
+      } else if (matchedWords > 0) {
+        rank = 3;
+      }
+
+      return {
+        name,
+        kcal,
+        rank,
+        matchedWords,
+        samples: Number(entry?.samples) || 0
+      };
+    })
+    .filter(item => item.rank < 99 && Number.isFinite(item.kcal) && item.kcal > 0)
+    .sort((a, b) => {
+      if (a.rank !== b.rank) return a.rank - b.rank;
+      if (b.matchedWords !== a.matchedWords) return b.matchedWords - a.matchedWords;
+      if (b.samples !== a.samples) return b.samples - a.samples;
+      return a.name.length - b.name.length;
+    })
+    .slice(0, limit);
+}
+
+function renderFoodCostResults(matches) {
+  const { results } = getFoodCostElements();
+  if (!results) return;
+
+  foodCostSearchResults = matches;
+
+  if (matches.length === 0) {
+    results.innerHTML = `
+      <p class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-500">
+        Nessun alimento trovato.
+      </p>
+    `;
+    setFoodCostDropdownVisible(true);
+    return;
+  }
+
+  results.innerHTML = matches.map((item, index) => `
+    <div class="flex flex-col gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+      <div class="min-w-0">
+        <div class="truncate text-sm font-semibold text-slate-800">${escapeHtml(item.name)}</div>
+        <div class="text-xs font-medium text-slate-500">≈ ${Math.round(item.kcal)} kcal</div>
+      </div>
+      <button
+        type="button"
+        class="w-full rounded bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-blue-700 sm:w-auto"
+        data-food-cost-index="${index}"
+      >
+        + Simula
+      </button>
+    </div>
+  `).join("");
+  setFoodCostDropdownVisible(true);
+}
+
+async function updateFoodCostSearch() {
+  const { input, results } = getFoodCostElements();
+  if (!input || !results) return;
+
+  const query = input.value.trim();
+  updateFoodCostClearButton();
+  clearFoodCostSimulation();
+
+  if (query.length < 2) {
+    clearFoodCostDropdown();
+    return;
+  }
+
+  let dictionary;
+  try {
+    dictionary = await loadFoodDictionary();
+  } catch (error) {
+    console.warn(error);
+    foodCostSearchResults = [];
+    results.innerHTML = "";
+    renderFoodCostMessage("Dizionario alimentare non disponibile al momento.");
+    return;
+  }
+
+  renderFoodCostResults(findFoodCostMatches(query, dictionary));
+}
+
+function simulateFoodCost(index) {
+  const item = foodCostSearchResults[index];
+  if (!item) return;
+
+  if (!liveCaloriesState.hasTodayEstimate || !Number.isFinite(liveCaloriesState.total)) {
+    renderFoodCostMessage("Kcal provvisorie di oggi non disponibili: simulazione non calcolabile.");
+    return;
+  }
+
+  const simulatedTotal = Math.round(liveCaloriesState.total + item.kcal);
+  const residualInfo = window.liveCaloriesUtils?.computeCalorieResidual(
+    simulatedTotal,
+    liveCaloriesState.target,
+    DAILY_KCAL_TARGET_TOLERANCE
+  );
+
+  if (!residualInfo || residualInfo.status === "unknown") {
+    renderFoodCostMessage("Target calorico non disponibile: simulazione non calcolabile.");
+    return;
+  }
+
+  if (residualInfo.status === "exceeded") {
+    renderFoodCostMessage(
+      `Se aggiungi "${item.name}", oggi arrivi a circa ${simulatedTotal} kcal. Superi il target di circa ${residualInfo.amount} kcal.`,
+      "danger"
+    );
+    return;
+  }
+
+  const remaining = residualInfo.status === "balanced" ? 0 : residualInfo.amount;
+  renderFoodCostMessage(
+    `Se aggiungi "${item.name}", oggi arrivi a circa ${simulatedTotal} kcal. Residuo stimato: ${remaining} kcal.`,
+    "success"
+  );
+}
+
+function initFoodCostSearch() {
+  const { input, clearButton, results } = getFoodCostElements();
+  if (!input || !results) return;
+
+  input.addEventListener("input", updateFoodCostSearch);
+  input.addEventListener("focus", () => {
+    updateFoodCostClearButton();
+    if (foodCostSearchResults.length > 0 || results.innerHTML.trim()) {
+      setFoodCostDropdownVisible(true);
+    }
+  });
+
+  if (clearButton) {
+    clearButton.addEventListener("click", () => {
+      input.value = "";
+      updateFoodCostClearButton();
+      clearFoodCostDropdown();
+      input.focus();
+    });
+  }
+
+  results.addEventListener("click", event => {
+    const button = event.target.closest("[data-food-cost-index]");
+    if (!button) return;
+
+    simulateFoodCost(Number(button.dataset.foodCostIndex));
+  });
+}
+
 function renderLiveCaloriesEmpty(message, note = "") {
   const card = document.getElementById("liveCaloriesCard");
   if (!card) return;
+
+  resetLiveCaloriesState();
 
   card.innerHTML = `
     <div class="flex items-center gap-2">
@@ -257,6 +524,7 @@ async function aggiornaStimaLiveOggi(dati) {
   const result = window.liveCaloriesUtils.estimateTodayCalories(todayRow, dictionary);
 
   if (result.matched.length === 0) {
+    resetLiveCaloriesState();
     renderLiveCaloriesEmpty(
       "Stima non disponibile: nessun alimento riconosciuto nello storico.",
       "Completa i pasti di oggi o arricchisci lo storico per ottenere una stima piu' affidabile."
@@ -264,6 +532,7 @@ async function aggiornaStimaLiveOggi(dati) {
     return;
   }
 
+  setLiveCaloriesState(result);
   renderLiveCaloriesCard(result, DAILY_KCAL_TARGET);
 }
 
@@ -1746,4 +2015,5 @@ window.addEventListener("orientationchange", () => {
 
 
 // === AVVIO ===
+initFoodCostSearch();
 caricaDati();
