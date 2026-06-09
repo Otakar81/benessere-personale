@@ -56,6 +56,62 @@
     return union === 0 ? 0 : intersection / union;
   }
 
+  function normalizeFoodSearchText(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[.,;:!?()[\]{}"']/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function findFoodCostMatches(query, dictionary, limit = 5) {
+    const normalizedQuery = normalizeFoodSearchText(query);
+    const queryWords = normalizedQuery.split(" ").filter(Boolean);
+
+    if (normalizedQuery.length < 2 || !dictionary || typeof dictionary !== "object") {
+      return [];
+    }
+
+    return Object.entries(dictionary)
+      .map(([name, entry]) => {
+        const kcal = Number(entry?.kcal);
+        const normalizedName = normalizeFoodSearchText(name);
+        const nameWords = normalizedName.split(" ").filter(Boolean);
+        const matchedWords = queryWords.filter(word =>
+          nameWords.some(nameWord => nameWord === word || nameWord.startsWith(word))
+        ).length;
+
+        let rank = 99;
+        if (normalizedName === normalizedQuery) {
+          rank = 0;
+        } else if (normalizedName.startsWith(normalizedQuery)) {
+          rank = 1;
+        } else if (normalizedName.includes(normalizedQuery)) {
+          rank = 2;
+        } else if (matchedWords > 0) {
+          rank = 3;
+        }
+
+        return {
+          name,
+          kcal,
+          rank,
+          matchedWords,
+          samples: Number(entry?.samples) || 0
+        };
+      })
+      .filter(item => item.rank < 99 && Number.isFinite(item.kcal) && item.kcal > 0)
+      .sort((a, b) => {
+        if (a.rank !== b.rank) return a.rank - b.rank;
+        if (b.matchedWords !== a.matchedWords) return b.matchedWords - a.matchedWords;
+        if (b.samples !== a.samples) return b.samples - a.samples;
+        return a.name.length - b.name.length;
+      })
+      .slice(0, limit);
+  }
+
   function getSourcePriority(source) {
     return SOURCE_PRIORITY[source] || 0;
   }
@@ -521,6 +577,8 @@
     extractInlineKcal,
     stripInlineKcal,
     tokenSimilarity,
+    normalizeFoodSearchText,
+    findFoodCostMatches,
     findTopMealCandidates,
     findBestMealMatch,
     splitMealIntoComponents,
